@@ -1,0 +1,36 @@
+﻿<Activity mc:Ignorable="sads sap" x:Class="artiso.TFSEventWorkflows.WorkflowsLib.CheckInNotificationWorkflow"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:att="clr-namespace:artiso.TFSEventWorkflows.TFSActivitiesLib;assembly=artiso.TFSEventWorkflows.TFSActivitiesLib"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:mtfs="clr-namespace:Microsoft.TeamFoundation.Framework.Server;assembly=Microsoft.TeamFoundation.Framework.Server"
+ xmlns:mtvs="clr-namespace:Microsoft.TeamFoundation.VersionControl.Server;assembly=Microsoft.TeamFoundation.VersionControl.Server"
+ xmlns:mtwc="clr-namespace:Microsoft.TeamFoundation.WorkItemTracking.Client;assembly=Microsoft.TeamFoundation.WorkItemTracking.Client"
+ xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
+ xmlns:s="clr-namespace:System;assembly=System"
+ xmlns:s1="clr-namespace:System;assembly=System.Core"
+ xmlns:s2="clr-namespace:System;assembly=System.ServiceModel"
+ xmlns:s3="clr-namespace:System;assembly=mscorlib"
+ xmlns:sa="clr-namespace:System.Activities;assembly=System.Activities"
+ xmlns:sad="clr-namespace:System.Activities.Debugger;assembly=System.Activities"
+ xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="TFSEvent" Type="InArgument(mtvs:CheckinNotification)" />
+    <x:Property Name="TeamFoundationRequestContext" Type="InArgument(mtfs:TeamFoundationRequestContext)" />
+  </x:Members>
+  <sap:VirtualizedContainerService.HintSize>262,186</sap:VirtualizedContainerService.HintSize>
+  <mva:VisualBasic.Settings>Assembly references and imported namespaces for internal implementation</mva:VisualBasic.Settings>
+  <Sequence sad:XamlDebuggerXmlReader.FileName="C:\Projects\CodeplexTFS\tfseventworkflows\TFSEventWorkflows\WorkflowsLib\CheckInNotificationWorkflow.xaml" sap:VirtualizedContainerService.HintSize="222,146">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="mtwc:WorkItem" Name="NewWorkItem" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <att:WriteLogMessage sap:VirtualizedContainerService.HintSize="200,22" IsError="True" LogMessage="[String.Format(&quot;User {0} checked in changeset {1} with comment: {2}&quot;, TFSEvent.WorkspaceOwnerName, TFSEvent.Changeset, TFSEvent.Comment)]" />
+  </Sequence>
+</Activity>

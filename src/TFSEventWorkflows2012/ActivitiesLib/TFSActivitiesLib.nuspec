@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>TFSEventWorkFlowsDependencies</id>
+    <version>$Version$</version>
+    <title>TFSEventWorkflows Dependencies</title>
+    <authors>artiso AG</authors>
+    <owners>artiso AG</owners>
+    <licenseUrl>http://LICENSE_URL_HERE_OR_DELETE_THIS_LINE</licenseUrl>
+    <projectUrl>http://tfseventworkflows.codeplex.com</projectUrl>
+    <iconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>This packages allows you to easily get all necessary dependencies you need to edit a work flow for the TFSEventWorkFlows project (tfseventworkflows.codeplex.com)</description>
+    <releaseNotes>This is a first alpha version</releaseNotes>
+    <copyright>Copyright 2013</copyright>
+    <tags>TFSEventWorkflows</tags>
+    <dependencies>
+      <dependency id="log4net" version="2.0.0" />
+    </dependencies>
+    <references>
+      <reference file="artiso.TFSEventWorkflows.TFSActivitiesLib.dll                       " />
+      <reference file="artiso.TFSEventWorkflows.LoggingLib.dll                             " />
+      <reference file="Microsoft.TeamFoundation.Build.Client.dll                           " />
+      <reference file="Microsoft.TeamFoundation.Build.Client.xml                           " />
+      <reference file="Microsoft.TeamFoundation.Build.Server.dll                           " />
+      <reference file="Microsoft.TeamFoundation.Client.dll                                 " />
+      <reference file="Microsoft.TeamFoundation.Common.dll                                 " />
+      <reference file="Microsoft.TeamFoundation.Common.xml                                 " />
+      <reference file="Microsoft.TeamFoundation.Framework.Server.dll                       " />
+      <reference file="Microsoft.TeamFoundation.TestManagement.Client.dll                  " />
+      <reference file="Microsoft.TeamFoundation.TestManagement.Server.dll                  " />
+      <reference file="Microsoft.TeamFoundation.VersionControl.Client.dll                  " />
+      <reference file="Microsoft.TeamFoundation.VersionControl.Client.xml                  " />
+      <reference file="Microsoft.TeamFoundation.VersionControl.Server.dll                  " />
+      <reference file="Microsoft.TeamFoundation.WorkItemTracking.Client.DataStoreLoader.dll" />
+      <reference file="Microsoft.TeamFoundation.WorkItemTracking.Client.dll                " />
+      <reference file="Microsoft.TeamFoundation.WorkItemTracking.Client.xml                " />
+      <reference file="Microsoft.TeamFoundation.WorkItemTracking.Server.Dataaccesslayer.dll" />
+    </references>
+  </metadata>
+  <files>
+    <file src="$ProjectOutputDir$\artiso.TFSEventWorkflows.TFSActivitiesLib.dll                       " target="lib" />
+    <file src="$ProjectOutputDir$\artiso.TFSEventWorkflows.LoggingLib.dll                             " target="lib" />
+    <file src="$ProjectOutputDir$\Microsoft.TeamFoundation.Build.Client.dll                           " target="lib" />
+    <file src="$ProjectOutputDir$\Microsoft.TeamFoundation.Build.Client.xml                           " target="lib" />
+    <file src="$ProjectOutputDir$\Microsoft.TeamFoundation.Build.Server.dll                           " target="lib" />
+    <file src="$ProjectOutputDir$\Microsoft.TeamFoundation.Client.dll                                 " target="lib" />
+    <file src="$ProjectOutputDir$\Microsoft.TeamFoundation.Common.dll                                 " target="lib" />
+    <file src="$ProjectOutputDir$\Microsoft.TeamFoundation.Common.xml                                 " target="lib" />
+    <file src="$ProjectOutputDir$\Microsoft.TeamFoundation.Framework.Server.dll                       " target="lib" />
+    <file src="$ProjectOutputDir$\Microsoft.TeamFoundation.TestManagement.Client.dll                  " target="lib" />
+    <file src="$ProjectOutputDir$\Microsoft.TeamFoundation.TestManagement.Server.dll                  " target="lib" />
+    <file src="$ProjectOutputDir$\Microsoft.TeamFoundation.VersionControl.Client.dll                  " target="lib" />
+    <file src="$ProjectOutputDir$\Microsoft.TeamFoundation.VersionControl.Client.xml                  " target="lib" />
+    <file src="$ProjectOutputDir$\Microsoft.TeamFoundation.VersionControl.Server.dll                  " target="lib" />
+    <file src="$ProjectOutputDir$\Microsoft.TeamFoundation.WorkItemTracking.Client.DataStoreLoader.dll" target="lib" />
+    <file src="$ProjectOutputDir$\Microsoft.TeamFoundation.WorkItemTracking.Client.dll                " target="lib" />
+    <file src="$ProjectOutputDir$\Microsoft.TeamFoundation.WorkItemTracking.Client.xml                " target="lib" />
+    <file src="$ProjectOutputDir$\Microsoft.TeamFoundation.WorkItemTracking.Server.Dataaccesslayer.dll" target="lib" />
+    <file src="$ProjectOutputDir$\Microsoft.WITDataStore.dll                                                    " target="lib" />
+  </files>
+</package>

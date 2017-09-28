@@ -1,0 +1,285 @@
+﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="artiso.TFSEventWorkflows.WorkflowsLib.BuildDefinitionChangedWorkflow"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:att="clr-namespace:artiso.TFSEventWorkflows.TFSActivitiesLib;assembly=artiso.TFSEventWorkflows.TFSActivitiesLib"
+ xmlns:attb="clr-namespace:artiso.TFSEventWorkflows.TFSActivitiesLib.BuildActivities;assembly=artiso.TFSEventWorkflows.TFSActivitiesLib"
+ xmlns:attw="clr-namespace:artiso.TFSEventWorkflows.TFSActivitiesLib.Workspace_Activities;assembly=artiso.TFSEventWorkflows.TFSActivitiesLib"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:mtbc="clr-namespace:Microsoft.TeamFoundation.Build.Client;assembly=Microsoft.TeamFoundation.Build.Client"
+ xmlns:mtbs="clr-namespace:Microsoft.TeamFoundation.Build.Server;assembly=Microsoft.TeamFoundation.Build.Server"
+ xmlns:mtbwa="clr-namespace:Microsoft.TeamFoundation.Build.Workflow.Activities;assembly=Microsoft.TeamFoundation.Build.Workflow"
+ xmlns:mtc="clr-namespace:Microsoft.TeamFoundation.Client;assembly=Microsoft.TeamFoundation.Client"
+ xmlns:mtfs="clr-namespace:Microsoft.TeamFoundation.Framework.Server;assembly=Microsoft.TeamFoundation.Framework.Server"
+ xmlns:mtvc="clr-namespace:Microsoft.TeamFoundation.VersionControl.Client;assembly=Microsoft.TeamFoundation.VersionControl.Client"
+ xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
+ xmlns:s="clr-namespace:System;assembly=System"
+ xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+ xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
+ xmlns:si="clr-namespace:System.IO;assembly=mscorlib"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="TFSEvent" Type="InArgument(mtbs:BuildDefinitionChangedEvent)" />
+    <x:Property Name="TeamFoundationRequestContext" Type="InArgument(mtfs:TeamFoundationRequestContext)" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap2010:WorkflowViewState.IdRef>artiso.TFSEventWorkflows.WorkflowsLib.WriteToLogWorkflow_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>artiso.TFSEventWorkflows.TFSActivitiesLib</x:String>
+      <x:String>Microsoft.TeamFoundation.Build.Server</x:String>
+      <x:String>Microsoft.TeamFoundation.Framework.Server</x:String>
+      <x:String>Microsoft.TeamFoundation.WorkItemTracking.Server</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Activities.Debugger</x:String>
+      <x:String>System.Activities.Debugger.Symbol</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Text</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>Microsoft.TeamFoundation.Build.Client</x:String>
+      <x:String>Microsoft.TeamFoundation.Client</x:String>
+      <x:String>System.Linq.Expressions</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>Microsoft.TeamFoundation.Build.Workflow</x:String>
+      <x:String>Microsoft.TeamFoundation.Build.Workflow.Activities</x:String>
+      <x:String>Microsoft.TeamFoundation.VersionControl.Client</x:String>
+      <x:String>Microsoft.TeamFoundation.Framework.Client</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>artiso.TFSEventWorkflows.TFSActivitiesLib</AssemblyReference>
+      <AssemblyReference>Microsoft.TeamFoundation.Build.Server</AssemblyReference>
+      <AssemblyReference>Microsoft.TeamFoundation.Framework.Server</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>Microsoft.TeamFoundation.Build.Client</AssemblyReference>
+      <AssemblyReference>Microsoft.TeamFoundation.Client</AssemblyReference>
+      <AssemblyReference>Microsoft.TeamFoundation.Build.Workflow</AssemblyReference>
+      <AssemblyReference>Microsoft.TeamFoundation.VersionControl.Client</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="Main" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="mtvc:Workspace" Name="workspace" />
+      <Variable x:TypeArguments="x:String" Default="default" Name="buildDefinitionXml" />
+    </Sequence.Variables>
+    <Sequence DisplayName="Sequence patch collection URL">
+      <Sequence.Variables>
+        <Variable x:TypeArguments="x:Uri" Default="[New Uri(TFSEvent.TeamProjectCollectionUrl)]" Name="uriPublic" />
+        <Variable x:TypeArguments="s:UriBuilder" Default="[New UriBuilder(uriPublic.Scheme, System.Environment.MachineName, uriPublic.Port, uriPublic.PathAndQuery)]" Name="uriBuilderLocal" />
+      </Sequence.Variables>
+      <Assign>
+        <Assign.To>
+          <OutArgument x:TypeArguments="x:String">[TFSEvent.TeamProjectCollectionUrl]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="x:String">[uriBuilderLocal.Uri.AbsoluteUri]</InArgument>
+        </Assign.Value>
+        <sap2010:WorkflowViewState.IdRef>Assign_6</sap2010:WorkflowViewState.IdRef>
+      </Assign>
+      <sap2010:WorkflowViewState.IdRef>Sequence_7</sap2010:WorkflowViewState.IdRef>
+    </Sequence>
+    <att:WriteLogMessage sap2010:WorkflowViewState.IdRef="WriteLogMessage_6" IsError="False" LogMessage="[String.Format(&quot;BuildDefinition  &quot;&quot;{0}&quot;&quot; in &quot;&quot;{1}/{2}&quot;&quot; was changed by &quot;&quot;{3}&quot;&quot;&quot;, _&#xA;              TFSEvent.Name, TFSEvent.TeamProjectCollectionUrl, TFSEvent.TeamProject, TFSEvent.ChangedBy)]" />
+    <If Condition="False" DisplayName="If DumpDiagnotics" sap2010:WorkflowViewState.IdRef="If_1">
+      <If.Then>
+        <Sequence DisplayName="Diagnostics" sap2010:WorkflowViewState.IdRef="Sequence_6">
+          <att:WriteLogMessage sap2010:WorkflowViewState.IdRef="WriteLogMessage_2" IsError="False" LogMessage="[&quot;Build Definition Changed&quot; &amp; vbCrLf &amp; _&#xA;String.Format(&quot;  Name {0}&quot;, TFSEvent.Name) &amp; vbCrLf &amp; _&#xA;String.Format(&quot;  ChangeType {0}&quot;, TFSEvent.ChangedType) &amp; vbCrLf &amp; _&#xA;String.Format(&quot;  TeamProjectCollectionUrl {0}&quot;, TFSEvent.TeamProjectCollectionUrl) &amp; vbCrLf &amp; _&#xA;String.Format(&quot;  Uri {0}&quot;, TFSEvent.Uri)]" />
+          <ForEach x:TypeArguments="mtbs:PropertyChange" DisplayName="ForEach&lt;PropertyChange&gt;" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[TFSEvent.PropertyChanges]">
+            <ActivityAction x:TypeArguments="mtbs:PropertyChange">
+              <ActivityAction.Argument>
+                <DelegateInArgument x:TypeArguments="mtbs:PropertyChange" Name="propertyChange" />
+              </ActivityAction.Argument>
+              <Sequence sap2010:WorkflowViewState.IdRef="Sequence_2">
+                <att:WriteLogMessage sap2010:WorkflowViewState.IdRef="WriteLogMessage_3" IsError="False" LogMessage="[String.Format(&quot;  property: {0} - new: {1} - old: {2}&quot;, propertyChange.Name, propertyChange.NewValue, propertyChange.OldValue)]" />
+              </Sequence>
+            </ActivityAction>
+          </ForEach>
+        </Sequence>
+      </If.Then>
+    </If>
+    <Sequence DisplayName="Get BuildDefinition" sap2010:WorkflowViewState.IdRef="Sequence_3">
+      <Sequence.Variables>
+        <Variable x:TypeArguments="mtc:TfsTeamProjectCollection" Default="[TfsTeamProjectCollectionFactory.GetTeamProjectCollection(New Uri(TFSEvent.TeamProjectCollectionUrl))]" Name="collection" />
+        <Variable x:TypeArguments="mtbc:IBuildServer" Default="[collection.GetService(Of IBuildServer)()]" Name="buildServer" />
+        <Variable x:TypeArguments="mtbc:IBuildDefinition" Default="[buildServer.GetBuildDefinition(New Uri(TFSEvent.Uri))]" Name="buildDefinition" />
+      </Sequence.Variables>
+      <attb:GetBuildDefinitionXml BuildDefinition="[buildDefinition]" sap2010:WorkflowViewState.IdRef="GetBuildDefinitionXml_1" Xml="[buildDefinitionXml]" />
+    </Sequence>
+    <Sequence DisplayName="Store BuildDefinition in Version Control" sap2010:WorkflowViewState.IdRef="Sequence_4">
+      <Sequence.Variables>
+        <Variable x:TypeArguments="x:String" Name="tempFolder" />
+        <Variable x:TypeArguments="x:String" Default="[String.Format(&quot;$/{0}/BuildDefinitions&quot;, TFSEvent.TeamProject)]" Name="serverFolder" />
+        <Variable x:TypeArguments="x:String" Name="randomName" />
+        <Variable x:TypeArguments="x:String" Name="buildDefinitionFile" />
+        <Variable x:TypeArguments="x:String" Name="localFolder" />
+        <Variable x:TypeArguments="x:String" Name="workFolder" />
+      </Sequence.Variables>
+      <Sequence DisplayName="Initialize Folder/File Names" sap2010:WorkflowViewState.IdRef="Sequence_5">
+        <Assign sap2010:WorkflowViewState.IdRef="Assign_1">
+          <Assign.To>
+            <OutArgument x:TypeArguments="x:String">[randomName]</OutArgument>
+          </Assign.To>
+          <Assign.Value>
+            <InArgument x:TypeArguments="x:String">[Path.GetRandomFileName()]</InArgument>
+          </Assign.Value>
+        </Assign>
+        <Assign sap2010:WorkflowViewState.IdRef="Assign_2">
+          <Assign.To>
+            <OutArgument x:TypeArguments="x:String">[tempFolder]</OutArgument>
+          </Assign.To>
+          <Assign.Value>
+            <InArgument x:TypeArguments="x:String">[Path.Combine(Path.GetTempPath(), "TfsEventWorkflows", "BuildDefinitionChangedWorkflow", randomName)]</InArgument>
+          </Assign.Value>
+        </Assign>
+        <Assign sap2010:WorkflowViewState.IdRef="Assign_4">
+          <Assign.To>
+            <OutArgument x:TypeArguments="x:String">[workFolder]</OutArgument>
+          </Assign.To>
+          <Assign.Value>
+            <InArgument x:TypeArguments="x:String">[Path.Combine(tempFolder, "work")]</InArgument>
+          </Assign.Value>
+        </Assign>
+        <Assign sap2010:WorkflowViewState.IdRef="Assign_5">
+          <Assign.To>
+            <OutArgument x:TypeArguments="x:String">[localFolder]</OutArgument>
+          </Assign.To>
+          <Assign.Value>
+            <InArgument x:TypeArguments="x:String">[Path.Combine(tempFolder, "local")]</InArgument>
+          </Assign.Value>
+        </Assign>
+        <Assign sap2010:WorkflowViewState.IdRef="Assign_3">
+          <Assign.To>
+            <OutArgument x:TypeArguments="x:String">[buildDefinitionFile]</OutArgument>
+          </Assign.To>
+          <Assign.Value>
+            <InArgument x:TypeArguments="x:String">[Path.Combine(workFolder, TFSEvent.Name &amp; ".xml")]</InArgument>
+          </Assign.Value>
+        </Assign>
+      </Sequence>
+      <mtbwa:CreateDirectory Directory="[workFolder]" sap2010:WorkflowViewState.IdRef="CreateDirectory_1" />
+      <mtbwa:CreateDirectory Directory="[localFolder]" sap2010:WorkflowViewState.IdRef="CreateDirectory_2" />
+      <att:CreateWorkspace sap2010:WorkflowViewState.IdRef="CreateWorkspace_1" LocalPath="[localFolder]" ServerPath="[serverFolder]" TFSCollectionUrl="[New Uri(TFSEvent.TeamProjectCollectionUrl)]" Workspace="[workspace]" WorkspaceComment="temporary Workspace created by TfsEventWorkflows" WorkspaceName="[randomName]" />
+      <att:GetFromSourceControl sap2010:WorkflowViewState.IdRef="GetFromSourceControl_1" ServerPath="[serverFolder]" Workspace="[workspace]" />
+      <InvokeMethod sap2010:WorkflowViewState.IdRef="InvokeMethod_1" MethodName="WriteAllText" TargetType="si:File">
+        <InArgument x:TypeArguments="x:String">[buildDefinitionFile]</InArgument>
+        <InArgument x:TypeArguments="x:String">[buildDefinitionXml]</InArgument>
+      </InvokeMethod>
+      <attw:AddToSourceControl CheckInComment="[String.Format(&quot;TfsEventWorkflow - BuildDefinition &quot;&quot;{0}&quot;&quot; was changed by &quot;&quot;{1}&quot;&quot;&quot;, TFSEvent.Name, TFSEvent.ChangedBy)]" DirectoryToUpload="[workFolder]" sap2010:WorkflowViewState.IdRef="AddToSourceControl_1" Workspace="[workspace]" />
+      <attw:DeleteWorkspace sap2010:WorkflowViewState.IdRef="DeleteWorkspace_1" Workspace="[workspace]" />
+    </Sequence>
+    <sads:DebugSymbol.Symbol>d4wBQzpcdGZzLWxvY2FsXHR0cm90emtpXHRmcy5jb2RlcGxleC5jb21cdGZzMzZcdGZzZXZlbnR3b3JrZmxvd3NcVEZTRXZlbnRXb3JrZmxvd3MyMDEyXFdvcmtmbG93c0xpYlxCdWlsZERlZmluaXRpb24uU3RvcmVJblZlcmlzb25Db250cm9sLnhhbWxHVQPDAQ4CAQFYNFg9AgECWgVpEAIBVmoFavUCAgFTawV7CgIBR3wFgwEQAgE+hAEFwQEQAgEDXDNcYQIBWF06XaYBAgFXXwdnEAIBWWpWal0CAVVqaWryAgIBVGsTaxoCAUhtCXkUAgFJfkp+sgECAUF/P39rAgFAgAFDgAF8AgE/ggEHggGeAQIBQocBNocBgQECAQSNAQe2ARICASm3AQe3AW0CASa4AQe4AW4CASO5AQe5AcECAgEYugEHugGQAQIBE7sBB74BFgIBDr8BB78BzQICAQjAAQfAAWsCAQVkMmRTAgFbYTNhVgIBWm4LboUEAgFQbwt4FQIBSoIBM4IBRgIBRYIBhQGCAZsBAgFDjgEJlQESAgE6lgEJnQESAgE2ngEJpQESAgEypgEJrQESAgEurgEJtQESAgEqtwEotwE2AgEnuAEouAE3AgEkuQHvAbkBoQICASK5AXW5AYUBAgEguQFauQFpAgEeuQGwArkBvgICARy5AdABuQHdAQIBGrkBlwG5AcUBAgEZugFlugF1AgEWugGAAboBjQECARS8ATC8AUUCARG9ATC9AUQCAQ+/AS+/AdoBAgENvwHtAb8B+wECAQu/Ab0CvwHKAgIBCcABW8ABaAIBBm5cbmMCAVJub26CBAIBUW+bAW+3AQIBT3QPdhoCAUuTATSTAU4CAT2QATWQAUECATubATSbAZkBAgE5mAE1mAFBAgE3owE0owFWAgE1oAE1oAFBAgEzqwE0qwFXAgExqAE1qAFCAgEvswE0swFqAgEtsAE1sAFKAgErdRF1gwICAUx1YnVpAgFOdXV1gAICAU0=</sads:DebugSymbol.Symbol>
+  </Sequence>
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData Id="Assign_6" sap:VirtualizedContainerService.HintSize="242,59" />
+      <sap2010:ViewStateData Id="Sequence_7" sap:VirtualizedContainerService.HintSize="264,183">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="WriteLogMessage_6" sap:VirtualizedContainerService.HintSize="264,22" />
+      <sap2010:ViewStateData Id="WriteLogMessage_2" sap:VirtualizedContainerService.HintSize="282,22" />
+      <sap2010:ViewStateData Id="WriteLogMessage_3" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="222,146">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ForEach`1_1" sap:VirtualizedContainerService.HintSize="282,291">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_6" sap:VirtualizedContainerService.HintSize="304,477">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="If_1" sap:VirtualizedContainerService.HintSize="264,49">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="GetBuildDefinitionXml_1" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="Sequence_3" sap:VirtualizedContainerService.HintSize="264,146">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_1" sap:VirtualizedContainerService.HintSize="243.2,60.8" />
+      <sap2010:ViewStateData Id="Assign_2" sap:VirtualizedContainerService.HintSize="243.2,60.8" />
+      <sap2010:ViewStateData Id="Assign_4" sap:VirtualizedContainerService.HintSize="243.2,60.8" />
+      <sap2010:ViewStateData Id="Assign_5" sap:VirtualizedContainerService.HintSize="243.2,60.8" />
+      <sap2010:ViewStateData Id="Assign_3" sap:VirtualizedContainerService.HintSize="243.2,60.8" />
+      <sap2010:ViewStateData Id="Sequence_5" sap:VirtualizedContainerService.HintSize="218,49">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="CreateDirectory_1" sap:VirtualizedContainerService.HintSize="218,22" />
+      <sap2010:ViewStateData Id="CreateDirectory_2" sap:VirtualizedContainerService.HintSize="218,22" />
+      <sap2010:ViewStateData Id="CreateWorkspace_1" sap:VirtualizedContainerService.HintSize="218,22" />
+      <sap2010:ViewStateData Id="GetFromSourceControl_1" sap:VirtualizedContainerService.HintSize="218,22" />
+      <sap2010:ViewStateData Id="InvokeMethod_1" sap:VirtualizedContainerService.HintSize="217.6,129.6" />
+      <sap2010:ViewStateData Id="AddToSourceControl_1" sap:VirtualizedContainerService.HintSize="217.6,22.4" />
+      <sap2010:ViewStateData Id="DeleteWorkspace_1" sap:VirtualizedContainerService.HintSize="217.6,22.4" />
+      <sap2010:ViewStateData Id="Sequence_4" sap:VirtualizedContainerService.HintSize="264,715">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="286,1399">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="artiso.TFSEventWorkflows.WorkflowsLib.WriteToLogWorkflow_1" sap:VirtualizedContainerService.HintSize="326,1479" />
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+</Activity>

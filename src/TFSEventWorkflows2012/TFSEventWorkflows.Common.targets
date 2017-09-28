@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <!-- read TFS registry settings -->
+  
+  <PropertyGroup>
+    <TfsVersion>0</TfsVersion>
+    <TfsBuildNumber>$([MSBuild]::GetRegistryValueFromView('HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\TeamFoundationServer\$(VisualStudioVersion)', 'BuildNumber', null, RegistryView.Registry64))</TfsBuildNumber>
+    <TfsInstallPath>$([MSBuild]::GetRegistryValueFromView('HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\TeamFoundationServer\$(VisualStudioVersion)', 'InstallPath', null, RegistryView.Registry64))</TfsInstallPath>
+  </PropertyGroup>
+  
+  <!-- set TFS version based on the build number -->
+  <!-- TODO: add new TFS version -->
+  
+  <PropertyGroup Condition="'$(VisualStudioVersion)|$(TfsBuildNumber)' == '11.0|50727.01'">
+    <TfsVersion>2012.0</TfsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(VisualStudioVersion)|$(TfsBuildNumber)' == '11.0|51106.01'">
+    <TfsVersion>2012.1</TfsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(VisualStudioVersion)|$(TfsBuildNumber)' == '11.0|60315.01'">
+    <TfsVersion>2012.2</TfsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(VisualStudioVersion)|$(TfsBuildNumber)' == '11.0|60610.01'">
+    <TfsVersion>2012.3</TfsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(VisualStudioVersion)|$(TfsBuildNumber)' == '11.0|61030.00'">
+    <TfsVersion>2012.4</TfsVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(VisualStudioVersion)|$(TfsBuildNumber)' == '12.0|21005.01'">
+    <TfsVersion>2013.0</TfsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(VisualStudioVersion)|$(TfsBuildNumber)' == '12.0|30324.00'">
+    <TfsVersion>2013.2</TfsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(VisualStudioVersion)|$(TfsBuildNumber)' == '12.0|30723.00'">
+    <TfsVersion>2013.3</TfsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(VisualStudioVersion)|$(TfsBuildNumber)' == '12.0|31101.00'">
+    <TfsVersion>2013.4</TfsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(VisualStudioVersion)|$(TfsBuildNumber)' == '12.0|40629.00'">
+    <TfsVersion>2013.5</TfsVersion>
+  </PropertyGroup>
+
+  <!-- 2015.0 RC1 '14.0|14.0.22824.0' | 2015.0 RC2 '14.0|14.0.23102.0' | 2015.0 RTM '14.0|14.0.23128.0' -->
+  <PropertyGroup Condition="'$(VisualStudioVersion)|$(TfsBuildNumber)' == '14.0|14.0.23128.0'">
+    <TfsVersion>2015.0</TfsVersion>
+  </PropertyGroup>
+  <!-- 2015.1 RC1 '14.0|14.0.24606.0' | 2015.1 RTM '14.0|14.0.24712.0'-->
+  <PropertyGroup Condition="'$(VisualStudioVersion)|$(TfsBuildNumber)' == '14.0|14.0.24712.0'">
+    <TfsVersion>2015.1</TfsVersion>
+  </PropertyGroup>
+  <!-- 2015.2 RC2 '14.0|14.95.25029.0' | 2015.2 RTM '14.0|14.95.25122.0'-->
+  <PropertyGroup Condition="'$(VisualStudioVersion)|$(TfsBuildNumber)' == '14.0|14.95.25122.0'">
+    <TfsVersion>2015.2</TfsVersion>
+  </PropertyGroup>
+  <!-- 2015.2.1 RTM '14.0|14.95.25229.0'-->
+  <PropertyGroup Condition="'$(VisualStudioVersion)|$(TfsBuildNumber)' == '14.0|14.95.25229.0'">
+    <TfsVersion>2015.2.1</TfsVersion>
+  </PropertyGroup>
+  <!-- 2015.3 RTM '14.0|14.102.25423.0'-->
+  <PropertyGroup Condition="'$(VisualStudioVersion)|$(TfsBuildNumber)' == '14.0|14.102.25423.0'">
+    <TfsVersion>2015.3</TfsVersion>
+  </PropertyGroup>
+
+  <!-- 2017.0 RTM '15.0|15.105.25910.0'-->
+  <PropertyGroup Condition="'$(TfsBuildNumber)' == '15.105.25910.0'">
+    <TfsVersion>2017.0</TfsVersion>
+  </PropertyGroup>
+
+  <!-- 2017.1 RTM '15.1|15.112.26301.0'-->
+  <PropertyGroup Condition="'$(TfsBuildNumber)' == '15.112.26301.0'">
+    <TfsVersion>2017.1</TfsVersion>
+  </PropertyGroup>
+
+  <!-- 2017.1 RTM '15.1|15.112.26307.0'-->
+  <PropertyGroup Condition="'$(TfsBuildNumber)' == '15.112.26307.0'">
+    <TfsVersion>2017.1</TfsVersion>
+  </PropertyGroup>
+
+  <!-- add TFS to AssemblySearchPath -->
+
+  <PropertyGroup>
+    <TfsServerOmPathsInSolution>false</TfsServerOmPathsInSolution>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TfsServerOmPaths>
+      $(TfsInstallPath)Application Tier\Web Services\bin;
+    </TfsServerOmPaths>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(TfsServerOmPathsInSolution)' == 'true'">
+    <TfsServerOmPaths>
+      $(SolutionDir)Web Services\bin;
+    </TfsServerOmPaths>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <AssemblySearchPaths>
+      $(TfsServerOmPaths)
+      $(AssemblySearchPaths)
+    </AssemblySearchPaths>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ProjectDesignTimeAssemblyResolutionSearchPaths>
+      $(TfsServerOmPaths)
+      $(ProjectDesignTimeAssemblyResolutionSearchPaths)
+    </ProjectDesignTimeAssemblyResolutionSearchPaths>
+  </PropertyGroup>
+
+  <!-- starting with TFS 2015.0 the client OM is no longer installed in GAC -->
+  <!-- in projects needing the deployment of the client OM assemblies $(UseTfsComCopyLocal) is set to 'true' -->
+  <PropertyGroup>
+    <TfsComCopyLocal>false</TfsComCopyLocal>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(TfsVersion)' >= '2015.0' AND $(UseTfsComCopyLocal) == 'true'">
+    <TfsComCopyLocal>true</TfsComCopyLocal>
+  </PropertyGroup>
+
+  <!-- common TFS references -->
+  
+  <ItemGroup>
+    <Reference Include="Microsoft.TeamFoundation.Build.Server">
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Microsoft.TeamFoundation.Build.Client">
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Microsoft.TeamFoundation.Client">
+      <Private>$(TfsComCopyLocal)</Private>
+    </Reference>
+    <Reference Include="Microsoft.TeamFoundation.Common">
+      <Private>$(TfsComCopyLocal)</Private>
+    </Reference>
+    <Reference Include="Microsoft.TeamFoundation.Framework.Server">
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Microsoft.TeamFoundation.TestManagement.Server">
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Microsoft.TeamFoundation.VersionControl.Client">
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Microsoft.TeamFoundation.VersionControl.Common">
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Microsoft.TeamFoundation.VersionControl.Server">
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Microsoft.TeamFoundation.WorkItemTracking.Server.Dataaccesslayer">
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Microsoft.TeamFoundation.WorkItemTracking.Client">
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+
+  <!-- version specific TFS reference -->
+  <!-- TODO: check this references when adding new TFS versions -->
+
+  <!-- starting with TFS 2012.2 class "CatalogNode" and others were moved 
+       from assembly/namespace "Microsoft.TeamFoundation.Framework.Server" 
+       to assembly/namespace "Microsoft.TeamFoundation.Server.Core" -->
+  <ItemGroup Condition="'$(TfsVersion)' >= '2012.2'">
+    <Reference Include="Microsoft.TeamFoundation.Server.Core">
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+  <PropertyGroup Condition="'$(TfsVersion)' >= '2012.2'">
+    <DefineConstants>$(DefineConstants);UsingMicrosoftTeamFoundationServerCore</DefineConstants>
+  </PropertyGroup>
+
+  <!-- in TFS 2012.1 class "CatalogNode" and others were moved 
+       from assembly/namespace "Microsoft.TeamFoundation.Framework.Server" 
+       to assembly/namespace "Microsoft.TeamFoundation.Framework.Server.Alm" -->
+  <ItemGroup Condition="'$(TfsVersion)' == '2012.1'">
+    <Reference Include="Microsoft.TeamFoundation.Framework.Server.Alm">
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+  <PropertyGroup Condition="'$(TfsVersion)' == '2012.1'">
+    <DefineConstants>$(DefineConstants);UsingMicrosoftTeamFoundationFrameworkServerAlm</DefineConstants>
+  </PropertyGroup>
+
+  <!-- starting with TFS 2013.0 class "VssException" and others were moved 
+       to assembly/namespace "Microsoft.VisualStudio.Services.Common" -->
+  <ItemGroup Condition="'$(TfsVersion)' >= '2013.0'">
+    <Reference Include="Microsoft.VisualStudio.Services.Common">
+      <Private>$(TfsComCopyLocal)</Private>
+    </Reference>
+   </ItemGroup>
+
+  <!-- starting with TFS 2013.0 class "VssHttpClientBase" and others were moved 
+       to assembly/namespace "Microsoft.VisualStudio.Services.WebApi" -->
+  <ItemGroup Condition="'$(TfsVersion)' >= '2013.0'">
+    <Reference Include="Microsoft.VisualStudio.Services.WebApi">
+      <Private>$(TfsComCopyLocal)</Private>
+    </Reference>
+  </ItemGroup>
+
+  <!-- starting with TFS 2013.2 class "WorkItemChangedEvent" was moved 
+       from assembly "Microsoft.TeamFoundation.WorkItemTracking.Server.DataAccessLayer" 
+       to assembly "Microsoft.TeamFoundation.WorkItemTracking.Server" -->
+  <ItemGroup Condition="'$(TfsVersion)' >= '2013.2'">
+    <Reference Include="Microsoft.TeamFoundation.WorkItemTracking.Server">
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+
+  <!-- starting with TFS 2015.0 new events were introduced in namespace "Microsoft.VisualStudio.Services.Identity.Events"
+       these are DecisionPoint events coming very often -->
+  <PropertyGroup Condition="'$(TfsVersion)' >= '2015.0'">
+    <DefineConstants>$(DefineConstants);UsingMicrosoftVisualStudioServicesIdentityEvents;UsingILocationService</DefineConstants>
+  </PropertyGroup>
+
+  <!-- starting with TFS 2015.1 Microsoft.TeamFoundation.Framework.Server is obsolete and removed, use IVssRequestContext instead -->
+  <PropertyGroup Condition="'$(TfsVersion)' >= '2015.1'">
+    <DefineConstants>$(DefineConstants);UsingIVssRequestContext</DefineConstants>
+  </PropertyGroup>
+
+  <!-- starting with TFS 2017.0 UICredentialsProvider is obsolete and removed, use VssClientCredentials instead -->
+  <ItemGroup Condition="'$(TfsVersion)' >= '2013.0'">
+    <Reference Include="Microsoft.VisualStudio.Services.Client">
+      <Private>$(TfsComCopyLocal)</Private>
+    </Reference>
+  </ItemGroup>
+  <PropertyGroup Condition="'$(TfsVersion)' >= '2017.0'">
+    <DefineConstants>$(DefineConstants);UsingVssClientCredentials</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(TfsVersion)' >= '2017.1'">
+    <DefineConstants>$(DefineConstants);UsingOrganizationServiceHost</DefineConstants>
+  </PropertyGroup>
+
+  <!-- starting with TFS 2017.1 class "VssClientCredentials" was moved 
+       from assembly "Microsoft.VisualStudio.Services.Client.Interactive" 
+       to assembly "Microsoft.VisualStudio.Services.Client.Interactive" -->
+  <ItemGroup Condition="'$(TfsVersion)' >= '2017.1'">
+    <Reference Include="Microsoft.VisualStudio.Services.Client.Interactive">
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+
+  <!-- check TFS version on build start -->
+
+  <PropertyGroup>
+    <BuildDependsOn>
+      CheckTfsVersion;
+      $(BuildDependsOn);
+    </BuildDependsOn>
+  </PropertyGroup>
+
+  <Target Name="CheckTfsVersion">
+    <Error Condition="'$(TfsVersion)' == '0'" Text="Attention: the TFS version on your build system is unknown - adjust 'TFSEventWorkflows.Common.targets'. VisualStudioVersion|TfsBuildNumber  == '$(VisualStudioVersion)|$(TfsBuildNumber)'" />
+  </Target>
+
+</Project>

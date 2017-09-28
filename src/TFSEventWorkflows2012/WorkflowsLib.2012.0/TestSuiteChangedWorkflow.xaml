@@ -1,0 +1,143 @@
+﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="artiso.TFSEventWorkflows.WorkflowsLib.WriteToLogWorkflow"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:att="clr-namespace:artiso.TFSEventWorkflows.TFSActivitiesLib;assembly=artiso.TFSEventWorkflows.TFSActivitiesLib"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:mtc="clr-namespace:Microsoft.TeamFoundation.Client;assembly=Microsoft.TeamFoundation.Client"
+ xmlns:mtfs="clr-namespace:Microsoft.TeamFoundation.Framework.Server;assembly=Microsoft.TeamFoundation.Framework.Server"
+ xmlns:mttc="clr-namespace:Microsoft.TeamFoundation.TestManagement.Client;assembly=Microsoft.TeamFoundation.TestManagement.Client"
+ xmlns:mtts="clr-namespace:Microsoft.TeamFoundation.TestManagement.Server;assembly=Microsoft.TeamFoundation.TestManagement.Server"
+ xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
+ xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+ xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="TFSEvent" Type="InArgument(mtts:TestSuiteChangedNotification)" />
+    <x:Property Name="TeamFoundationRequestContext" Type="InArgument(mtfs:TeamFoundationRequestContext)" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap2010:WorkflowViewState.IdRef>artiso.TFSEventWorkflows.WorkflowsLib.WriteToLogWorkflow_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>artiso.TFSEventWorkflows.TFSActivitiesLib</x:String>
+      <x:String>Microsoft.TeamFoundation.Build.Server</x:String>
+      <x:String>Microsoft.TeamFoundation.Framework.Server</x:String>
+      <x:String>Microsoft.TeamFoundation.WorkItemTracking.Server</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Activities.Debugger</x:String>
+      <x:String>System.Activities.Debugger.Symbol</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Text</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>Microsoft.TeamFoundation.TestManagement.Server</x:String>
+      <x:String>Microsoft.TeamFoundation.Client</x:String>
+      <x:String>Microsoft.TeamFoundation.Build.Client</x:String>
+      <x:String>Microsoft.TeamFoundation.TestManagement.Client</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>artiso.TFSEventWorkflows.TFSActivitiesLib</AssemblyReference>
+      <AssemblyReference>Microsoft.TeamFoundation.Build.Server</AssemblyReference>
+      <AssemblyReference>Microsoft.TeamFoundation.Framework.Server</AssemblyReference>
+      <AssemblyReference>Microsoft.TeamFoundation.WorkItemTracking.Server.DataAccessLayer</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>Microsoft.TeamFoundation.TestManagement.Server</AssemblyReference>
+      <AssemblyReference>Microsoft.TeamFoundation.Client</AssemblyReference>
+      <AssemblyReference>Microsoft.TeamFoundation.Build.Client</AssemblyReference>
+      <AssemblyReference>Microsoft.TeamFoundation.TestManagement.Client</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="Main" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Name="tfsCollectionUrl" />
+      <Variable x:TypeArguments="mtc:TfsTeamProjectCollection" Name="tfsCollection" />
+    </Sequence.Variables>
+    <att:GetTeamProjectCollection requestContext="[TeamFoundationRequestContext]" teamProjectCollection="[tfsCollection]" teamProjectCollectionUrl="[tfsCollectionUrl]" sap2010:WorkflowViewState.IdRef="GetTeamProjectCollection_1" />
+    <Sequence DisplayName="Test Suite">
+      <Sequence.Variables>
+        <Variable x:TypeArguments="mttc:ITestManagementService" Name="tfsTestManagement" />
+        <Variable x:TypeArguments="mttc:ITestManagementTeamProject" Name="tfsTestProject" />
+        <Variable x:TypeArguments="mttc:ITestSuiteBase" Name="tfsTestSuite" />
+      </Sequence.Variables>
+      <Assign>
+        <Assign.To>
+          <OutArgument x:TypeArguments="mttc:ITestManagementService">[tfsTestManagement]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="mttc:ITestManagementService">[tfsCollection.GetService(Of ITestManagementService)()]</InArgument>
+        </Assign.Value>
+        <sap2010:WorkflowViewState.IdRef>Assign_1</sap2010:WorkflowViewState.IdRef>
+      </Assign>
+      <Assign>
+        <Assign.To>
+          <OutArgument x:TypeArguments="mttc:ITestManagementTeamProject">[tfsTestProject]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="mttc:ITestManagementTeamProject">[tfsTestManagement.GetTeamProject(TFSEvent.ProjectName)]</InArgument>
+        </Assign.Value>
+        <sap2010:WorkflowViewState.IdRef>Assign_2</sap2010:WorkflowViewState.IdRef>
+      </Assign>
+      <Assign>
+        <Assign.To>
+          <OutArgument x:TypeArguments="mttc:ITestSuiteBase">[tfsTestSuite]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="mttc:ITestSuiteBase">[tfsTestProject.TestSuites.Find(TFSEvent.SuiteId)]</InArgument>
+        </Assign.Value>
+        <sap2010:WorkflowViewState.IdRef>Assign_3</sap2010:WorkflowViewState.IdRef>
+      </Assign>
+      <att:WriteLogMessage sap2010:WorkflowViewState.IdRef="WriteLogMessage_1" IsError="True" LogMessage="[String.Format(&quot;Suite &quot;&quot;{0}&quot;&quot; (Id={1} under plan &quot;&quot;{2}&quot;&quot; in project &quot;&quot;{3}&quot;&quot;) was modified by {4} at {5}&quot;, _&#xD;&#xA;  tfsTestSuite.Title, tfsTestSuite.Id, tfsTestSuite.Plan.Name, TFSEvent.ProjectName, tfsTestSuite.LastUpdatedByName, tfsTestSuite.LastUpdated)]" />
+      <sap2010:WorkflowViewState.IdRef>Sequence_2</sap2010:WorkflowViewState.IdRef>
+    </Sequence>
+    <sads:DebugSymbol.Symbol>d3pDOlx0ZnMtbG9jYWxcdHRyXHRmcy5jb2RlcGxleC5jb21cdGZzMzZcdGZzZXZlbnR3b3JrZmxvd3NcVEZTRXZlbnRXb3JrZmxvd3MyMDEyXFdvcmtmbG93c0xpYlxUZXN0U3VpdGVDaGFuZ2VkV29ya2Zsb3cueGFtbBJKA3UOAgEBTwVP6AECARJQBXMQAgECT2lPegIBF08yT1ICARVPlAFPqAECARNWB14QAgEOXwdnEAIBCmgHcBACAQZxB3G5AwIBA1tFW3wCARFYRlhZAgEPZElkgQECAQ1hSmFaAgELbT1tbwIBCWo+akwCAQdxWHFeAgEFcWpxtgMCAQQ=</sads:DebugSymbol.Symbol>
+  </Sequence>
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData Id="GetTeamProjectCollection_1" sap:VirtualizedContainerService.HintSize="265.6,22.4" />
+      <sap2010:ViewStateData Id="Assign_1" sap:VirtualizedContainerService.HintSize="243.2,60.8" />
+      <sap2010:ViewStateData Id="Assign_2" sap:VirtualizedContainerService.HintSize="243.2,60.8" />
+      <sap2010:ViewStateData Id="Assign_3" sap:VirtualizedContainerService.HintSize="243.2,60.8" />
+      <sap2010:ViewStateData Id="WriteLogMessage_1" sap:VirtualizedContainerService.HintSize="243.2,22.4" />
+      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="265.6,449.6">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="288,636.8">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="artiso.TFSEventWorkflows.WorkflowsLib.WriteToLogWorkflow_1" sap:VirtualizedContainerService.HintSize="328,716.8" />
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+</Activity>

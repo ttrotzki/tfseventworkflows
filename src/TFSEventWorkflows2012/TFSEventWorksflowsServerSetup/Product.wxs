@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
+  <Product Id="*" Name="TFS Event Worksflows" Language="1033" Version="0.11.41741.0" Manufacturer="artiso AG" UpgradeCode="3278351C-9780-49DF-A9A0-59E09009575E">
+
+    <!-- Basic Properties -->
+    <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" Platform="x64"/>
+    <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+    <MediaTemplate />
+
+    <!-- User Interface -->
+    <UIRef Id="WixUI_FeatureTree" />
+    <WixVariable Id="WixUILicenseRtf" Value="$(var.SolutionDir)\Documentation\License.rtf" />
+
+    <!-- Directories -->
+   
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="TFSINSTALLDIR">
+        <Directory Id ="APPTIERDIR" Name="Application Tier">
+          <Directory Id ="WEBSERVICESDIR" Name ="Web Services">
+            <Directory Id ="APPTIERBINDIR" Name="bin">
+              <Directory Id ="APPTIERPLUGINSDIR" Name="plugins"/>
+            </Directory>
+          </Directory>
+        </Directory>
+      </Directory>
+      
+      <Directory Id="ProgramFiles64Folder">
+        <Directory Id="INSTALLFOLDER" Name="TFS Event Worksflows">
+          <Directory Id="DOCUMENTATIONFOLDER" Name="Docs" />
+          <Directory Id="SAMPLEFOLDER" Name="Samples" />
+        </Directory>
+      </Directory>
+      
+      <Directory Id="ProgramMenuFolder">
+        <Directory Id="ApplicationProgramsFolder" Name="TFS Event Worksflows"/>
+      </Directory>
+      
+      <Directory Id="CommonAppDataFolder">
+        <Directory Id="LOGGINGDIR" Name="TEW-Logs"/>
+      </Directory>
+    </Directory>
+
+    <Property Id ="BUILD_TFSBUILDNUMBER" Value="$(var.TFSBUILDNUMBER)"/>
+    <Property Id ="BUILD_VISUALSTUDIOVERSION" Value="$(var.VISUALSTUDIOVERSION)"/>
+    <Property Id ="BUILD_TFSVERSION" Value="$(var.TFSVERSION)"/>
+    
+    <?if $(var.TFSVERSION)="2013.2" or $(var.TFSVERSION)="2013.3" ?>
+        <?define BuildGroup="2013.2"?>
+        <?define RequiredVersionMessage="This installation requires TFS 2013.2 or TFS 2013.3!"?>
+    <?endif?>
+    <?if $(var.TFSVERSION)="2013.0" ?>
+        <?define BuildGroup="2013.0"?>
+        <?define RequiredVersionMessage="This installation requires TFS 2013.0!"?>
+    <?endif?>
+    <?if $(var.TFSVERSION)="2012.4" or $(var.TFSVERSION)="2012.3" or $(var.TFSVERSION)="2012.2"?>
+        <?define BuildGroup="2012.2"?>
+        <?define RequiredVersionMessage="This installation requires TFS 2012.4, TFS 2012.3 or TFS 2012.2!"?>
+    <?endif?>
+    <?if $(var.TFSVERSION)="2012.1" ?>
+        <?define BuildGroup="2012.1"?>
+        <?define RequiredVersionMessage="This installation requires TFS 2012.1!"?>
+    <?endif?>
+    <?if $(var.TFSVERSION)="2012.0" ?>
+        <?define BuildGroup="2012.0"?>
+        <?define RequiredVersionMessage="This installation requires TFS 2012.0!"?>
+    <?endif?>
+
+    <Property Id="INSTALLED_TFSBUILDNUMBER">
+      <RegistrySearch Id="Installed_TfsBuildNumber"
+              Root="HKLM"
+              Key="Software\Microsoft\TeamFoundationServer\$(var.VISUALSTUDIOVERSION)"
+              Name="BuildNumber"
+              Type="raw" />
+    </Property>
+    
+    <?if $(var.BuildGroup)="2013.2" ?>
+      <Condition Message="$(var.RequiredVersionMessage)">
+        <![CDATA[INSTALLED_TFSBUILDNUMBER="30324.00" or INSTALLED_TFSBUILDNUMBER="30723.00"]]>
+     </Condition>
+    <?endif?>
+    <?if $(var.BuildGroup)="2013.0" ?>
+      <Condition Message="$(var.RequiredVersionMessage)">
+        <![CDATA[INSTALLED_TFSBUILDNUMBER="21005.01"]]>
+      </Condition>
+    <?endif?>
+    <?if $(var.BuildGroup)="2012.2" ?>
+      <Condition Message="$(var.RequiredVersionMessage)">
+        <![CDATA[(INSTALLED_TFSBUILDNUMBER="61030.00" or INSTALLED_TFSBUILDNUMBER="60610.01" or INSTALLED_TFSBUILDNUMBER="60315.01")]]>
+      </Condition>
+    <?endif?>
+    <?if $(var.BuildGroup)="2012.1" ?>
+      <Condition Message="$(var.RequiredVersionMessage)">
+        <![CDATA[INSTALLED_TFSBUILDNUMBER="51106.01"]]>
+      </Condition>
+    <?endif?>
+    <?if $(var.BuildGroup)="2012.0"?>
+      <Condition Message="$(var.RequiredVersionMessage)">
+        <![CDATA[INSTALLED_TFSBUILDNUMBER="50727.01"]]>
+      </Condition>
+    <?endif?>
+
+    <!-- GET TFS Installtion Directory from registry -->
+    
+    <Property Id="TFSINSTALLDIR">
+      <RegistrySearch Id="TFSPLUGINDIR"
+              Root="HKLM"
+              Key="Software\Microsoft\TeamFoundationServer\$(var.VISUALSTUDIOVERSION)"
+              Name="InstallPath"
+              Type="raw" />
+    </Property>
+
+    <!-- Documentation -->
+
+    <ComponentGroup Id="Documentation">
+      <ComponentRef Id="GettingStartedGuide"/>
+    </ComponentGroup>
+
+    <DirectoryRef Id="DOCUMENTATIONFOLDER"
+                  FileSource="$(var.SolutionDir)\Documentation\">
+      <Component Id="GettingStartedGuide"
+                 Guid="79240184-93F7-477C-A090-EF8A579944B0"
+                 Win64="yes">
+        <File Id="GettingStartedWithTFSEventWorkflows.docx"
+              Name="GettingStartedWithTFSEventWorkflows.docx"
+              KeyPath="yes"/>
+      </Component>
+    </DirectoryRef>
+
+    <!-- Server Plugin Components -->
+
+    <ComponentGroup Id="ServerComponents">
+      <ComponentRef Id="TFSEventWorkflowsServerPlugIn"/>
+      <ComponentRef Id="LoggingLib"/>
+      <ComponentRef Id="log4net"/>
+    </ComponentGroup>
+
+    <DirectoryRef Id="APPTIERPLUGINSDIR"
+                  FileSource="$(var.SolutionDir)\output\Plugins">
+      <Component Id ="TFSEventWorkflowsServerPlugIn"
+                 Guid="4572A7AA-28ED-4CF7-9496-E955C8DCDAF4"
+                 Win64="yes">
+        <File Id="TFSEventWorkflowsServerPlugin.dll"
+              Name="artiso.TFSEventWorkflows.TFSEventWorkflowsServerPlugin.dll"
+              KeyPath="yes"/>
+        <File Id="TFSEventWorkflowsServerPlugin.dll.config"
+              Name="artiso.TFSEventWorkflows.TFSEventWorkflowsServerPlugin.dll.config"
+              KeyPath="no"/>
+      </Component>
+      <Component Id ="LoggingLib"
+                  Guid="C21EF82E-F9AC-47A5-BF62-82143D492E7A"
+                  Win64="yes">
+        <File Id="artiso.TFSEventWorkflows.LoggingLib"
+              Name="artiso.TFSEventWorkflows.LoggingLib.dll"
+              KeyPath="yes"/>
+      </Component>
+      <Component Id ="log4net"
+                  Guid="8BD50913-8290-47EF-84F2-C558FA8EB01F"
+                  Win64="yes">
+        <File Id="log4net.dll"
+              Name="log4net.dll"
+              KeyPath="yes"/>
+      </Component>
+    </DirectoryRef>
+
+    <!-- Configuration Tools -->
+
+    <ComponentGroup Id="ConfigTools">
+      <ComponentRef Id="TfsEventWorkflowsConfiguration"/>
+      <ComponentRef Id="ConfigToolShortcut"/>
+    </ComponentGroup>
+
+    <DirectoryRef Id="INSTALLFOLDER"
+                  FileSource="$(var.SolutionDir)\output\ConfigTool\">
+      <Component Id="TfsEventWorkflowsConfiguration"
+                 Guid="D3C3D670-5B27-4E90-9DFE-1E5871A59FA8"
+                 Win64="yes">
+        <File Id="TfsEventWorkflowsConfiguration.exe"
+              Name="TfsEventWorkflowsConfiguration.exe"
+              KeyPath="yes"/>
+      </Component>
+    </DirectoryRef>
+    
+    <Component Id="ConfigToolShortcut"
+                Guid="59A9D2C9-8BCA-4B38-AC81-C051C6E507B7"
+                Win64="yes"
+                Directory="ApplicationProgramsFolder">
+      <Shortcut Id="ApplicationStartMenuShortcut"
+                Name="TFS Event Workflows Configuration Tool"
+                Description="This tools is used to edit the essential configuration parameters of TFS Event Workflows."
+                Target="[#TfsEventWorkflowsConfiguration.exe]"
+                WorkingDirectory="INSTALLFOLDER"/>
+      <RemoveFolder Id="ApplicationProgramsFolder" On="uninstall"/>
+      <RegistryValue Root="HKCU"
+                      Key="Software\artiso\TFSEventWorkflows\ConfigTool"
+                      Name="installed"
+                      Type="integer"
+                      Value="1"
+                      KeyPath="yes"/>
+    </Component>
+    
+    <!-- Workflow Activities Library -->
+
+    <ComponentGroup Id="WorkflowActivitiesLib" >
+      <ComponentRef Id="TFSActivitiesLib"/>
+    </ComponentGroup>
+
+    <DirectoryRef Id="APPTIERPLUGINSDIR" FileSource="$(var.SolutionDir)\output\WorkflowActivities\">
+      <Component Id="TFSActivitiesLib"
+                 Guid="BCC9C67D-7434-4005-B647-636551BD8FF1"
+                 Win64="yes">
+        <File
+          Id="artiso.TFSEventWorkflows.TFSActivitiesLib.dll"
+          Name="artiso.TFSEventWorkflows.TFSActivitiesLib.dll"
+          KeyPath="yes"/>
+      </Component>
+    </DirectoryRef>
+
+    <!-- Test Workflows -->
+
+    <ComponentGroup Id="TestWorkflows" >
+      <ComponentRef Id="DumpWorkitem"/>
+      <ComponentRef Id="EmptyWorkflow"/>
+    </ComponentGroup>
+
+    <DirectoryRef Id="APPTIERPLUGINSDIR"
+                  FileSource="$(var.SolutionDir)\output\WorkflowSamples.2013.2\">
+      <Component Id="DumpWorkitem"
+                 Guid="A6646C9C-0CBD-4CB9-978C-72C6DAC004A7"
+                 Win64="yes" >
+        <File Id="DumpWorkitem.xaml"
+              Name="DumpWorkitem.xaml"
+              KeyPath="no"/>
+      </Component>
+      <Component Id="EmptyWorkflow"
+                 Guid="71E0C7EF-FC14-48FC-AD0B-D8E58E5DF5D7"
+                 Win64="yes">
+        <File Id="EmptyWorkflow.xaml"
+              Name="EmptyWorkflow.xaml"
+              KeyPath="no"/>
+      </Component>
+    </DirectoryRef>
+    
+    <!-- Sample Workflows -->
+    <ComponentGroup Id="SampleWorkflows">
+      <ComponentRef Id="AddTaskToNewUserStory"/>
+      <ComponentRef Id="BuildCompletionWorkflow"/>
+      <ComponentRef Id="BuildDefinition.StoreInVerisonControl"/>
+      <ComponentRef Id="BuildDefinitionChangedTriggerBuild"/>
+      <ComponentRef Id="BuildQualityChangedWorkflow"/>
+      <ComponentRef Id="CheckInNotificationWorkflow"/>
+      <ComponentRef Id="QueueToJobAgentWorkflow"/>
+      <ComponentRef Id="StatusAggregation"/>
+      <ComponentRef Id="TestSuiteChangedWorkflow"/>
+      <ComponentRef Id="WorkItem.State.Task.Aggregate"/>
+      <ComponentRef Id="WorkItem.State.UserStory.Committed.AddTask"/>
+    </ComponentGroup>
+
+    <DirectoryRef Id="SAMPLEFOLDER"
+                  FileSource="$(var.SolutionDir)\output\WorkflowSamples.2013.2\">
+      <Component Id="AddTaskToNewUserStory"
+               Guid="6414AED2-E3E9-466D-8CA8-74ACB3EFAB71"
+               Win64="yes">
+        <File Id="AddTaskToNewUserStory.xaml"
+              Name="AddTaskToNewUserStory.xaml"
+              KeyPath="no"/>
+      </Component>
+      <Component Id="BuildCompletionWorkflow"
+               Guid="A56F2068-93EC-437E-9D28-1CBA2BA47723"
+               Win64="yes">
+        <File Id="BuildCompletionWorkflow.xaml"
+              Name="BuildCompletionWorkflow.xaml"
+              KeyPath="no"/>
+      </Component>
+      <Component Id="BuildDefinition.StoreInVerisonControl"
+               Guid="082FA1AE-7E7D-425E-ADE0-647B7250E60F"
+               Win64="yes">
+        <File Id="BuildDefinition.StoreInVerisonControl.xaml"
+              Name="BuildDefinition.StoreInVerisonControl.xaml"
+              KeyPath="no"/>
+      </Component>
+      <Component Id="BuildDefinitionChangedTriggerBuild"
+               Guid="E7FAAE1C-AFB3-4CBE-A653-359B48C6B23F"
+               Win64="yes">
+        <File Id="BuildDefinitionChangedTriggerBuild.xaml"
+              Name="BuildDefinitionChangedTriggerBuild.xaml"
+              KeyPath="no"/>
+      </Component>
+      <Component Id="BuildQualityChangedWorkflow"
+               Guid="14D125F0-A8C0-4BD8-B57C-1138360EAA40"
+               Win64="yes">
+        <File Id="BuildQualityChangedWorkflow.xaml"
+              Name="BuildQualityChangedWorkflow.xaml"
+              KeyPath="no"/>
+      </Component>
+      <Component Id="CheckInNotificationWorkflow"
+               Guid="F1DB1822-3D74-4575-856D-090DA90B94FD"
+               Win64="yes">
+        <File Id="CheckInNotificationWorkflow.xaml"
+              Name="CheckInNotificationWorkflow.xaml"
+              KeyPath="no"/>
+      </Component>
+      <Component Id="QueueToJobAgentWorkflow"
+              Guid="22869818-14B8-4AAC-96BD-BF5B42F6B788"
+              Win64="yes">
+        <File Id="QueueToJobAgentWorkflow.xaml"
+              Name="QueueToJobAgentWorkflow.xaml"
+              KeyPath="no"/>
+      </Component>
+      <Component Id="StatusAggregation"
+           Guid="8711B1DB-F97B-4969-9C1F-374DBB4348E4"
+           Win64="yes">
+        <File Id="StatusAggregation.xaml"
+              Name="StatusAggregation.xaml"
+              KeyPath="no"/>
+      </Component>
+      <Component Id="TestSuiteChangedWorkflow"
+           Guid="91C2B4CA-5351-4D6D-9ADB-7A1C526FB289"
+           Win64="yes">
+        <File Id="TestSuiteChangedWorkflow.xaml"
+              Name="TestSuiteChangedWorkflow.xaml"
+              KeyPath="no"/>
+      </Component>
+      <Component Id="WorkItem.State.Task.Aggregate"
+           Guid="D24F1035-A889-4DC6-BF50-D61338386A2A"
+           Win64="yes">
+        <File Id="WorkItem.State.Task.Aggregate.xaml"
+              Name="WorkItem.State.Task.Aggregate.xaml"
+              KeyPath="no"/>
+      </Component>
+      <Component Id="WorkItem.State.UserStory.Committed.AddTask"
+           Guid="6EA4E2F2-7CDC-417F-BC61-F179B0328F88"
+           Win64="yes">
+        <File Id="WorkItem.State.UserStory.Committed.AddTask.xaml"
+              Name="WorkItem.State.UserStory.Committed.AddTask.xaml"
+              KeyPath="no"/>
+      </Component>
+    </DirectoryRef>
+    
+    <!-- Features -->   
+    <Feature Id="ServerPluginFeature"
+             Title="TFS Server Plugin"
+             Level="1"
+             AllowAdvertise="no"
+             Absent="disallow"
+             Description="This feature installs the TFS plugin used to execute event workflows.">
+      <ComponentGroupRef Id="ServerComponents"/>
+    </Feature>
+    <Feature Id="ConfigToolsFeature"
+             Title="Configuration Tools"
+             Level="1"
+             AllowAdvertise="no"
+             Absent="disallow"
+             ConfigurableDirectory="INSTALLFOLDER"
+             Description="This feature installs the configuration tools for TFS Event Workflows.">
+      <ComponentGroupRef Id="ConfigTools" />
+    </Feature>
+    <Feature Id="DocumentationFeature"
+             Title="Documentation"
+             Level="1"
+             AllowAdvertise="no"
+             ConfigurableDirectory="DOCUMENTATIONFOLDER"
+             Description="This feature installs all product documentation.">
+      <ComponentGroupRef Id="Documentation" />
+    </Feature>
+    <Feature Id="WorkflowActivitiesLibrary"
+             Title="Workflow Activities Library"
+             Level="1"
+             AllowAdvertise="no"
+             Description="This feature installs the library which defines essential workflow activities that can be used in TFS Event Workflows.">
+      <ComponentGroupRef Id="WorkflowActivitiesLib" />
+    </Feature>
+    <Feature Id="TestWorkflowsFeature"
+             Title="Test Workflows"
+             Level="1"
+             AllowAdvertise="no"
+             Description="This feature installs a few example workflows suitable for testing.">
+      <ComponentGroupRef Id="TestWorkflows" />
+    </Feature>
+    <Feature Id="SampleWorkflowsFeature"
+             Title="Sample Workflows"
+             Level="1"
+             AllowAdvertise="no"
+             ConfigurableDirectory="SAMPLEFOLDER"
+             Description="This feature installs a few example workflows that can be used as starting points for your own workflows.">
+      <ComponentGroupRef Id="SampleWorkflows" />
+    </Feature>
+    <Feature Id="ConfigureLoggingFeature"
+             Title="Configure Logging"
+             AllowAdvertise="no"
+             Absent="disallow"
+             Level="1"
+             ConfigurableDirectory="LOGGINGDIR"
+             Description="Please use 'Browse..' dialog to change path for logfiles.">
+      <Component Id="ConfigureLogging"
+                 Guid="81F94884-D18D-4839-A155-7C84302D49F6"
+                 Directory="LOGGINGDIR">
+        <util:XmlFile Id="Xml.BatchService.config.ProcessDataContext"
+                      Action="setValue"
+                      ElementPath="/configuration/log4net/appender/file"
+                      Name="value"
+                      Value="[LOGGINGDIR]tew-%date{yyyy-MM-dd}-WebService.log"
+                      File="[#TFSEventWorkflowsServerPlugin.dll.config]"
+                      SelectionLanguage="XPath"
+                      Sequence="1"></util:XmlFile>
+        <CreateFolder/>
+        <RemoveFolder Id="LOGGINGDIR" On="uninstall"/>
+      </Component>
+    </Feature>
+
+  </Product>
+</Wix>

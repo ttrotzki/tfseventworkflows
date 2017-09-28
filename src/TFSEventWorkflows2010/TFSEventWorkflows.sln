@@ -1,0 +1,174 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TFSActivitiesLib", "ActivitiesLib\TFSActivitiesLib.csproj", "{E9EE3325-379D-499E-8B26-4763DCC0C830}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkflowsLib", "WorkflowsLib\WorkflowsLib.csproj", "{6F4D90B0-97B3-4FEB-8FFA-58D3528149F5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TFSEventWorkflowsServerPlugin", "TFsEventWorkflowsServerPlugin\TFSEventWorkflowsServerPlugin.csproj", "{2450363A-8189-40D8-A961-172A93A1C6BA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Includes", "Includes", "{C243CF65-3494-4072-8D6E-889311F8E894}"
+	ProjectSection(SolutionItems) = preProject
+		Includes\artiso.TFSEventWorkflows.TFSEventWorkflowsServerPlugin.dll.config = Includes\artiso.TFSEventWorkflows.TFSEventWorkflowsServerPlugin.dll.config
+		Includes\log4net.dll = Includes\log4net.dll
+		Includes\Microsoft.TeamFoundation.Build.Client.dll = Includes\Microsoft.TeamFoundation.Build.Client.dll
+		Includes\Microsoft.TeamFoundation.Build.Server.dll = Includes\Microsoft.TeamFoundation.Build.Server.dll
+		Includes\Microsoft.TeamFoundation.Build.Workflow.dll = Includes\Microsoft.TeamFoundation.Build.Workflow.dll
+		Includes\Microsoft.TeamFoundation.Client.dll = Includes\Microsoft.TeamFoundation.Client.dll
+		Includes\Microsoft.TeamFoundation.Common.dll = Includes\Microsoft.TeamFoundation.Common.dll
+		Includes\Microsoft.TeamFoundation.Framework.Server.dll = Includes\Microsoft.TeamFoundation.Framework.Server.dll
+		Includes\Microsoft.TeamFoundation.VersionControl.Server.DLL = Includes\Microsoft.TeamFoundation.VersionControl.Server.DLL
+		Includes\Microsoft.TeamFoundation.WorkItemTracking.Client.dll = Includes\Microsoft.TeamFoundation.WorkItemTracking.Client.dll
+		Includes\Microsoft.TeamFoundation.WorkItemTracking.Server.Dataaccesslayer.dll = Includes\Microsoft.TeamFoundation.WorkItemTracking.Server.Dataaccesslayer.dll
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TFSEventWorkflowsTests", "TFSEventWorkflowsTests\TFSEventWorkflowsTests.csproj", "{D4559E7D-AF8F-4A3D-A136-6CAC8B2C7AA8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{785102A0-8EBD-4EA1-98EA-42E38FC0177A}"
+	ProjectSection(SolutionItems) = preProject
+		CommonAssemblyInfo.cs = CommonAssemblyInfo.cs
+		Local.testsettings = Local.testsettings
+		TFSEventWorkflows.vsmdi = TFSEventWorkflows.vsmdi
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoggingLib", "LoggingLib\LoggingLib.csproj", "{8C740570-E1FB-4526-8E71-E6FF69B6919A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Setup", "Setup", "{DE885B5F-FD1A-465B-BCC2-7BBE2841D106}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Workflows", "Workflows", "{B73F2689-F104-4D0D-9E6B-29A47B662ACB}"
+	ProjectSection(SolutionItems) = preProject
+		LoggingLib\LogExtensions.cs = LoggingLib\LogExtensions.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{D7419418-7C85-4A69-BA46-D9F053FE57EA}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "TFSEventWorkflowsSetupx64", "TFSEventWorkflowsSetup\TFSEventWorkflowsSetup.vdproj", "{6C819BDA-0747-49FE-BB3A-08C2CD598BD2}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "TFSEventWorkflowsSetupx86", "TFSEventWorkflowsSetupx86\TFSEventWorkflowsSetupx86.vdproj", "{73AD203C-6B9C-4A5E-B718-DBE6A8C82B7D}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 8
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs36
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = TFSEventWorkflowsTests\\TFSEventWorkflowsTests.csproj
+		SccProjectName1 = TFSEventWorkflowsTests
+		SccLocalPath1 = TFSEventWorkflowsTests
+		SccProjectUniqueName2 = TFsEventWorkflowsServerPlugin\\TFSEventWorkflowsServerPlugin.csproj
+		SccProjectName2 = TFsEventWorkflowsServerPlugin
+		SccLocalPath2 = TFsEventWorkflowsServerPlugin
+		SccProjectUniqueName3 = WorkflowsLib\\WorkflowsLib.csproj
+		SccProjectTopLevelParentUniqueName3 = TFSEventWorkflows.sln
+		SccProjectName3 = WorkflowsLib
+		SccLocalPath3 = WorkflowsLib
+		SccProjectUniqueName4 = LoggingLib\\LoggingLib.csproj
+		SccProjectName4 = LoggingLib
+		SccLocalPath4 = LoggingLib
+		SccProjectUniqueName5 = ActivitiesLib\\TFSActivitiesLib.csproj
+		SccProjectName5 = ActivitiesLib
+		SccLocalPath5 = ActivitiesLib
+		SccProjectUniqueName6 = TFSEventWorkflowsSetup\\TFSEventWorkflowsSetup.vdproj
+		SccProjectTopLevelParentUniqueName6 = TFSEventWorkflows.sln
+		SccProjectName6 = TFSEventWorkflowsSetup
+		SccLocalPath6 = TFSEventWorkflowsSetup
+		SccProjectUniqueName7 = TFSEventWorkflowsSetupx86\\TFSEventWorkflowsSetupx86.vdproj
+		SccProjectTopLevelParentUniqueName7 = TFSEventWorkflows.sln
+		SccProjectName7 = TFSEventWorkflowsSetupx86
+		SccLocalPath7 = TFSEventWorkflowsSetupx86
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = TFSEventWorkflows.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|Mixed Platforms = Debug|Mixed Platforms
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E9EE3325-379D-499E-8B26-4763DCC0C830}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9EE3325-379D-499E-8B26-4763DCC0C830}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9EE3325-379D-499E-8B26-4763DCC0C830}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{E9EE3325-379D-499E-8B26-4763DCC0C830}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{E9EE3325-379D-499E-8B26-4763DCC0C830}.Debug|x86.ActiveCfg = Debug|x86
+		{E9EE3325-379D-499E-8B26-4763DCC0C830}.Debug|x86.Build.0 = Debug|x86
+		{E9EE3325-379D-499E-8B26-4763DCC0C830}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9EE3325-379D-499E-8B26-4763DCC0C830}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E9EE3325-379D-499E-8B26-4763DCC0C830}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{E9EE3325-379D-499E-8B26-4763DCC0C830}.Release|Mixed Platforms.Build.0 = Release|x86
+		{E9EE3325-379D-499E-8B26-4763DCC0C830}.Release|x86.ActiveCfg = Release|Any CPU
+		{6F4D90B0-97B3-4FEB-8FFA-58D3528149F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F4D90B0-97B3-4FEB-8FFA-58D3528149F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F4D90B0-97B3-4FEB-8FFA-58D3528149F5}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{6F4D90B0-97B3-4FEB-8FFA-58D3528149F5}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{6F4D90B0-97B3-4FEB-8FFA-58D3528149F5}.Debug|x86.ActiveCfg = Debug|x86
+		{6F4D90B0-97B3-4FEB-8FFA-58D3528149F5}.Debug|x86.Build.0 = Debug|x86
+		{6F4D90B0-97B3-4FEB-8FFA-58D3528149F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F4D90B0-97B3-4FEB-8FFA-58D3528149F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F4D90B0-97B3-4FEB-8FFA-58D3528149F5}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{6F4D90B0-97B3-4FEB-8FFA-58D3528149F5}.Release|Mixed Platforms.Build.0 = Release|x86
+		{6F4D90B0-97B3-4FEB-8FFA-58D3528149F5}.Release|x86.ActiveCfg = Release|Any CPU
+		{2450363A-8189-40D8-A961-172A93A1C6BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2450363A-8189-40D8-A961-172A93A1C6BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2450363A-8189-40D8-A961-172A93A1C6BA}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{2450363A-8189-40D8-A961-172A93A1C6BA}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{2450363A-8189-40D8-A961-172A93A1C6BA}.Debug|x86.ActiveCfg = Debug|x86
+		{2450363A-8189-40D8-A961-172A93A1C6BA}.Debug|x86.Build.0 = Debug|x86
+		{2450363A-8189-40D8-A961-172A93A1C6BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2450363A-8189-40D8-A961-172A93A1C6BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2450363A-8189-40D8-A961-172A93A1C6BA}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{2450363A-8189-40D8-A961-172A93A1C6BA}.Release|Mixed Platforms.Build.0 = Release|x86
+		{2450363A-8189-40D8-A961-172A93A1C6BA}.Release|x86.ActiveCfg = Release|Any CPU
+		{D4559E7D-AF8F-4A3D-A136-6CAC8B2C7AA8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4559E7D-AF8F-4A3D-A136-6CAC8B2C7AA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4559E7D-AF8F-4A3D-A136-6CAC8B2C7AA8}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{D4559E7D-AF8F-4A3D-A136-6CAC8B2C7AA8}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{D4559E7D-AF8F-4A3D-A136-6CAC8B2C7AA8}.Debug|x86.ActiveCfg = Debug|x86
+		{D4559E7D-AF8F-4A3D-A136-6CAC8B2C7AA8}.Debug|x86.Build.0 = Debug|x86
+		{D4559E7D-AF8F-4A3D-A136-6CAC8B2C7AA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4559E7D-AF8F-4A3D-A136-6CAC8B2C7AA8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4559E7D-AF8F-4A3D-A136-6CAC8B2C7AA8}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{D4559E7D-AF8F-4A3D-A136-6CAC8B2C7AA8}.Release|Mixed Platforms.Build.0 = Release|x86
+		{D4559E7D-AF8F-4A3D-A136-6CAC8B2C7AA8}.Release|x86.ActiveCfg = Release|Any CPU
+		{8C740570-E1FB-4526-8E71-E6FF69B6919A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C740570-E1FB-4526-8E71-E6FF69B6919A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C740570-E1FB-4526-8E71-E6FF69B6919A}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{8C740570-E1FB-4526-8E71-E6FF69B6919A}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{8C740570-E1FB-4526-8E71-E6FF69B6919A}.Debug|x86.ActiveCfg = Debug|x86
+		{8C740570-E1FB-4526-8E71-E6FF69B6919A}.Debug|x86.Build.0 = Debug|x86
+		{8C740570-E1FB-4526-8E71-E6FF69B6919A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C740570-E1FB-4526-8E71-E6FF69B6919A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C740570-E1FB-4526-8E71-E6FF69B6919A}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{8C740570-E1FB-4526-8E71-E6FF69B6919A}.Release|Mixed Platforms.Build.0 = Release|x86
+		{8C740570-E1FB-4526-8E71-E6FF69B6919A}.Release|x86.ActiveCfg = Release|x86
+		{8C740570-E1FB-4526-8E71-E6FF69B6919A}.Release|x86.Build.0 = Release|x86
+		{6C819BDA-0747-49FE-BB3A-08C2CD598BD2}.Debug|Any CPU.ActiveCfg = Debug
+		{6C819BDA-0747-49FE-BB3A-08C2CD598BD2}.Debug|Mixed Platforms.ActiveCfg = Debug
+		{6C819BDA-0747-49FE-BB3A-08C2CD598BD2}.Debug|x86.ActiveCfg = Debug
+		{6C819BDA-0747-49FE-BB3A-08C2CD598BD2}.Release|Any CPU.ActiveCfg = Release
+		{6C819BDA-0747-49FE-BB3A-08C2CD598BD2}.Release|Any CPU.Build.0 = Release
+		{6C819BDA-0747-49FE-BB3A-08C2CD598BD2}.Release|Mixed Platforms.ActiveCfg = Release
+		{6C819BDA-0747-49FE-BB3A-08C2CD598BD2}.Release|Mixed Platforms.Build.0 = Release
+		{6C819BDA-0747-49FE-BB3A-08C2CD598BD2}.Release|x86.ActiveCfg = Release
+		{73AD203C-6B9C-4A5E-B718-DBE6A8C82B7D}.Debug|Any CPU.ActiveCfg = Debug
+		{73AD203C-6B9C-4A5E-B718-DBE6A8C82B7D}.Debug|Mixed Platforms.ActiveCfg = Debug
+		{73AD203C-6B9C-4A5E-B718-DBE6A8C82B7D}.Debug|x86.ActiveCfg = Debug
+		{73AD203C-6B9C-4A5E-B718-DBE6A8C82B7D}.Release|Any CPU.ActiveCfg = Release
+		{73AD203C-6B9C-4A5E-B718-DBE6A8C82B7D}.Release|Any CPU.Build.0 = Release
+		{73AD203C-6B9C-4A5E-B718-DBE6A8C82B7D}.Release|Mixed Platforms.ActiveCfg = Release
+		{73AD203C-6B9C-4A5E-B718-DBE6A8C82B7D}.Release|Mixed Platforms.Build.0 = Release
+		{73AD203C-6B9C-4A5E-B718-DBE6A8C82B7D}.Release|x86.ActiveCfg = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{6F4D90B0-97B3-4FEB-8FFA-58D3528149F5} = {B73F2689-F104-4D0D-9E6B-29A47B662ACB}
+		{6C819BDA-0747-49FE-BB3A-08C2CD598BD2} = {DE885B5F-FD1A-465B-BCC2-7BBE2841D106}
+		{73AD203C-6B9C-4A5E-B718-DBE6A8C82B7D} = {DE885B5F-FD1A-465B-BCC2-7BBE2841D106}
+	EndGlobalSection
+EndGlobal

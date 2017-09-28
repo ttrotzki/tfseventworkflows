@@ -1,0 +1,48 @@
+﻿<Activity mc:Ignorable="sap sads" x:Class="artiso.TFSEventWorkflows.WorkflowsLib.AddTaskToNewUserStory"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:att="clr-namespace:artiso.TFSEventWorkflows.TFSActivitiesLib;assembly=artiso.TFSEventWorkflows.TFSActivitiesLib"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:mtfs="clr-namespace:Microsoft.TeamFoundation.Framework.Server;assembly=Microsoft.TeamFoundation.Framework.Server"
+ xmlns:mtwc="clr-namespace:Microsoft.TeamFoundation.WorkItemTracking.Client;assembly=Microsoft.TeamFoundation.WorkItemTracking.Client, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+ xmlns:mtws="clr-namespace:Microsoft.TeamFoundation.WorkItemTracking.Server;assembly=Microsoft.TeamFoundation.WorkItemTracking.Server.DataAccessLayer"
+ xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
+ xmlns:sad="clr-namespace:System.Activities.Debugger;assembly=System.Activities"
+ xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="TFSEvent" Type="InArgument(mtws:WorkItemChangedEvent)" />
+    <x:Property Name="TeamFoundationRequestContext" Type="InArgument(mtfs:TeamFoundationRequestContext)" />
+  </x:Members>
+  <sap:VirtualizedContainerService.HintSize>526,666</sap:VirtualizedContainerService.HintSize>
+  <mva:VisualBasic.Settings>Assembly references and imported namespaces for internal implementation</mva:VisualBasic.Settings>
+  <Sequence sad:XamlDebuggerXmlReader.FileName="C:\Projects\CodeplexTFS\tfseventworkflows\TFSEventWorkflows\WorkflowsLib\AddTaskToNewUserStory.xaml" sap:VirtualizedContainerService.HintSize="486,626">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="mtwc:WorkItem" Name="SavedWorkitem" />
+      <Variable x:TypeArguments="x:String" Name="TFSUrl" />
+      <Variable x:TypeArguments="mtwc:WorkItem" Name="NewWorkItem" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <att:GetWorkItemChangedEventData ChangedFields="{x:Null}" sap:VirtualizedContainerService.HintSize="464,22" TFSCollectionUrl="[TFSUrl]" TeamFoundationRequestContext="[TeamFoundationRequestContext]" WorkItem="[SavedWorkitem]" WorkItemChangedEvent="[TFSEvent]" />
+    <If Condition="[SavedWorkitem.Type.Name.Equals(&quot;User Story&quot;) And SavedWorkitem.Revision.Equals(1)]" sap:VirtualizedContainerService.HintSize="464,440">
+      <If.Then>
+        <Sequence sap:VirtualizedContainerService.HintSize="222,332">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <att:CreateNewWorkItem sap:VirtualizedContainerService.HintSize="200,22" NewWorkItem="[NewWorkItem]" TFSCollectionUrl="[TFSUrl]" TeamProjectName="[SavedWorkitem.Project.Name]" WorkItemType="Task" />
+          <att:ChangeWorkItemField FieldReferenceName="System.Title" sap:VirtualizedContainerService.HintSize="200,22" NewValue="[&quot;Task for User Story: &quot; + SavedWorkitem.Title]" WorkItem="[NewWorkItem]" />
+          <att:SaveWorkItem sap:VirtualizedContainerService.HintSize="200,22" WorkItem="[NewWorkItem]" />
+          <att:CreateLink ChildWorkItem="[NewWorkItem]" sap:VirtualizedContainerService.HintSize="200,22" LinkType="System.LinkTypes.Hierarchy" ParentWorkItem="[SavedWorkitem]" />
+        </Sequence>
+      </If.Then>
+    </If>
+  </Sequence>
+</Activity>

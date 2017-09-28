@@ -1,0 +1,207 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24606.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TFSActivitiesLib", "ActivitiesLib\TFSActivitiesLib.csproj", "{E9EE3325-379D-499E-8B26-4763DCC0C830}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TFSEventWorkflowsServerPlugin", "TFsEventWorkflowsServerPlugin\TFSEventWorkflowsServerPlugin.csproj", "{2450363A-8189-40D8-A961-172A93A1C6BA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TFSEventWorkflowsTests", "TFSEventWorkflowsTests\TFSEventWorkflowsTests.csproj", "{D4559E7D-AF8F-4A3D-A136-6CAC8B2C7AA8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{785102A0-8EBD-4EA1-98EA-42E38FC0177A}"
+	ProjectSection(SolutionItems) = preProject
+		CommonAssemblyInfo.cs = CommonAssemblyInfo.cs
+		Local.testsettings = Local.testsettings
+		TFSEventWorkflows.Common.targets = TFSEventWorkflows.Common.targets
+		TFSEventWorkflows.vsmdi = TFSEventWorkflows.vsmdi
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoggingLib", "LoggingLib\LoggingLib.csproj", "{8C740570-E1FB-4526-8E71-E6FF69B6919A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Workflows", "Workflows", "{B73F2689-F104-4D0D-9E6B-29A47B662ACB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{D7419418-7C85-4A69-BA46-D9F053FE57EA}"
+	ProjectSection(SolutionItems) = preProject
+		Documentation\GettingStartedWithTFSEventWorkflows.docx = Documentation\GettingStartedWithTFSEventWorkflows.docx
+		Documentation\License.rtf = Documentation\License.rtf
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{49128529-F1AA-4F14-BC1E-FA179EC57253}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TfsEventWorkflowsConfiguration", "TfsEventWorkflowsConfiguration\TfsEventWorkflowsConfiguration.csproj", "{9145762A-7257-4F31-A9B1-EA4F2363FB4F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkflowsLib.2013.2", "WorkflowsLib.2013.2\WorkflowsLib.2013.2.csproj", "{6F4D90B0-97B3-4FEB-8FFA-58D3528149F5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkflowsLib.2012.0", "WorkflowsLib.2012.0\WorkflowsLib.2012.0.csproj", "{31674EB8-D5DF-485B-94A2-30F7AB5073BB}"
+EndProject
+Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "TFSEventWorksflowsServerSetup", "TFSEventWorksflowsServerSetup\TFSEventWorksflowsServerSetup.wixproj", "{CB49A57A-68D6-484B-99AC-1AE79F6D6326}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkflowsLib.2015.1", "WorkflowsLib.2015.1\WorkflowsLib.2015.1.csproj", "{6D12EC82-8267-4D97-8493-B54C21CF6D27}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|Mixed Platforms = Debug|Mixed Platforms
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E9EE3325-379D-499E-8B26-4763DCC0C830}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9EE3325-379D-499E-8B26-4763DCC0C830}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9EE3325-379D-499E-8B26-4763DCC0C830}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{E9EE3325-379D-499E-8B26-4763DCC0C830}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{E9EE3325-379D-499E-8B26-4763DCC0C830}.Debug|x86.ActiveCfg = Debug|x86
+		{E9EE3325-379D-499E-8B26-4763DCC0C830}.Debug|x86.Build.0 = Debug|x86
+		{E9EE3325-379D-499E-8B26-4763DCC0C830}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9EE3325-379D-499E-8B26-4763DCC0C830}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E9EE3325-379D-499E-8B26-4763DCC0C830}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{E9EE3325-379D-499E-8B26-4763DCC0C830}.Release|Mixed Platforms.Build.0 = Release|x86
+		{E9EE3325-379D-499E-8B26-4763DCC0C830}.Release|x86.ActiveCfg = Release|Any CPU
+		{2450363A-8189-40D8-A961-172A93A1C6BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2450363A-8189-40D8-A961-172A93A1C6BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2450363A-8189-40D8-A961-172A93A1C6BA}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{2450363A-8189-40D8-A961-172A93A1C6BA}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{2450363A-8189-40D8-A961-172A93A1C6BA}.Debug|x86.ActiveCfg = Debug|x86
+		{2450363A-8189-40D8-A961-172A93A1C6BA}.Debug|x86.Build.0 = Debug|x86
+		{2450363A-8189-40D8-A961-172A93A1C6BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2450363A-8189-40D8-A961-172A93A1C6BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2450363A-8189-40D8-A961-172A93A1C6BA}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{2450363A-8189-40D8-A961-172A93A1C6BA}.Release|Mixed Platforms.Build.0 = Release|x86
+		{2450363A-8189-40D8-A961-172A93A1C6BA}.Release|x86.ActiveCfg = Release|Any CPU
+		{D4559E7D-AF8F-4A3D-A136-6CAC8B2C7AA8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4559E7D-AF8F-4A3D-A136-6CAC8B2C7AA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4559E7D-AF8F-4A3D-A136-6CAC8B2C7AA8}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{D4559E7D-AF8F-4A3D-A136-6CAC8B2C7AA8}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{D4559E7D-AF8F-4A3D-A136-6CAC8B2C7AA8}.Debug|x86.ActiveCfg = Debug|x86
+		{D4559E7D-AF8F-4A3D-A136-6CAC8B2C7AA8}.Debug|x86.Build.0 = Debug|x86
+		{D4559E7D-AF8F-4A3D-A136-6CAC8B2C7AA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4559E7D-AF8F-4A3D-A136-6CAC8B2C7AA8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4559E7D-AF8F-4A3D-A136-6CAC8B2C7AA8}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{D4559E7D-AF8F-4A3D-A136-6CAC8B2C7AA8}.Release|Mixed Platforms.Build.0 = Release|x86
+		{D4559E7D-AF8F-4A3D-A136-6CAC8B2C7AA8}.Release|x86.ActiveCfg = Release|Any CPU
+		{8C740570-E1FB-4526-8E71-E6FF69B6919A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C740570-E1FB-4526-8E71-E6FF69B6919A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C740570-E1FB-4526-8E71-E6FF69B6919A}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{8C740570-E1FB-4526-8E71-E6FF69B6919A}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{8C740570-E1FB-4526-8E71-E6FF69B6919A}.Debug|x86.ActiveCfg = Debug|x86
+		{8C740570-E1FB-4526-8E71-E6FF69B6919A}.Debug|x86.Build.0 = Debug|x86
+		{8C740570-E1FB-4526-8E71-E6FF69B6919A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C740570-E1FB-4526-8E71-E6FF69B6919A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C740570-E1FB-4526-8E71-E6FF69B6919A}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{8C740570-E1FB-4526-8E71-E6FF69B6919A}.Release|Mixed Platforms.Build.0 = Release|x86
+		{8C740570-E1FB-4526-8E71-E6FF69B6919A}.Release|x86.ActiveCfg = Release|x86
+		{8C740570-E1FB-4526-8E71-E6FF69B6919A}.Release|x86.Build.0 = Release|x86
+		{9145762A-7257-4F31-A9B1-EA4F2363FB4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9145762A-7257-4F31-A9B1-EA4F2363FB4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9145762A-7257-4F31-A9B1-EA4F2363FB4F}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{9145762A-7257-4F31-A9B1-EA4F2363FB4F}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{9145762A-7257-4F31-A9B1-EA4F2363FB4F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{9145762A-7257-4F31-A9B1-EA4F2363FB4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9145762A-7257-4F31-A9B1-EA4F2363FB4F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9145762A-7257-4F31-A9B1-EA4F2363FB4F}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{9145762A-7257-4F31-A9B1-EA4F2363FB4F}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{9145762A-7257-4F31-A9B1-EA4F2363FB4F}.Release|x86.ActiveCfg = Release|Any CPU
+		{6F4D90B0-97B3-4FEB-8FFA-58D3528149F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F4D90B0-97B3-4FEB-8FFA-58D3528149F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F4D90B0-97B3-4FEB-8FFA-58D3528149F5}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{6F4D90B0-97B3-4FEB-8FFA-58D3528149F5}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{6F4D90B0-97B3-4FEB-8FFA-58D3528149F5}.Debug|x86.ActiveCfg = Debug|x86
+		{6F4D90B0-97B3-4FEB-8FFA-58D3528149F5}.Debug|x86.Build.0 = Debug|x86
+		{6F4D90B0-97B3-4FEB-8FFA-58D3528149F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F4D90B0-97B3-4FEB-8FFA-58D3528149F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F4D90B0-97B3-4FEB-8FFA-58D3528149F5}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{6F4D90B0-97B3-4FEB-8FFA-58D3528149F5}.Release|Mixed Platforms.Build.0 = Release|x86
+		{6F4D90B0-97B3-4FEB-8FFA-58D3528149F5}.Release|x86.ActiveCfg = Release|x86
+		{6F4D90B0-97B3-4FEB-8FFA-58D3528149F5}.Release|x86.Build.0 = Release|x86
+		{31674EB8-D5DF-485B-94A2-30F7AB5073BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31674EB8-D5DF-485B-94A2-30F7AB5073BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31674EB8-D5DF-485B-94A2-30F7AB5073BB}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{31674EB8-D5DF-485B-94A2-30F7AB5073BB}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{31674EB8-D5DF-485B-94A2-30F7AB5073BB}.Debug|x86.ActiveCfg = Debug|x86
+		{31674EB8-D5DF-485B-94A2-30F7AB5073BB}.Debug|x86.Build.0 = Debug|x86
+		{31674EB8-D5DF-485B-94A2-30F7AB5073BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31674EB8-D5DF-485B-94A2-30F7AB5073BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31674EB8-D5DF-485B-94A2-30F7AB5073BB}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{31674EB8-D5DF-485B-94A2-30F7AB5073BB}.Release|Mixed Platforms.Build.0 = Release|x86
+		{31674EB8-D5DF-485B-94A2-30F7AB5073BB}.Release|x86.ActiveCfg = Release|x86
+		{31674EB8-D5DF-485B-94A2-30F7AB5073BB}.Release|x86.Build.0 = Release|x86
+		{CB49A57A-68D6-484B-99AC-1AE79F6D6326}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{CB49A57A-68D6-484B-99AC-1AE79F6D6326}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{CB49A57A-68D6-484B-99AC-1AE79F6D6326}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{CB49A57A-68D6-484B-99AC-1AE79F6D6326}.Debug|x86.ActiveCfg = Debug|x86
+		{CB49A57A-68D6-484B-99AC-1AE79F6D6326}.Debug|x86.Build.0 = Debug|x86
+		{CB49A57A-68D6-484B-99AC-1AE79F6D6326}.Release|Any CPU.ActiveCfg = Release|x86
+		{CB49A57A-68D6-484B-99AC-1AE79F6D6326}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{CB49A57A-68D6-484B-99AC-1AE79F6D6326}.Release|Mixed Platforms.Build.0 = Release|x86
+		{CB49A57A-68D6-484B-99AC-1AE79F6D6326}.Release|x86.ActiveCfg = Release|x86
+		{CB49A57A-68D6-484B-99AC-1AE79F6D6326}.Release|x86.Build.0 = Release|x86
+		{6D12EC82-8267-4D97-8493-B54C21CF6D27}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D12EC82-8267-4D97-8493-B54C21CF6D27}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D12EC82-8267-4D97-8493-B54C21CF6D27}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{6D12EC82-8267-4D97-8493-B54C21CF6D27}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{6D12EC82-8267-4D97-8493-B54C21CF6D27}.Debug|x86.ActiveCfg = Debug|x86
+		{6D12EC82-8267-4D97-8493-B54C21CF6D27}.Debug|x86.Build.0 = Debug|x86
+		{6D12EC82-8267-4D97-8493-B54C21CF6D27}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D12EC82-8267-4D97-8493-B54C21CF6D27}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D12EC82-8267-4D97-8493-B54C21CF6D27}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{6D12EC82-8267-4D97-8493-B54C21CF6D27}.Release|Mixed Platforms.Build.0 = Release|x86
+		{6D12EC82-8267-4D97-8493-B54C21CF6D27}.Release|x86.ActiveCfg = Release|x86
+		{6D12EC82-8267-4D97-8493-B54C21CF6D27}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{6F4D90B0-97B3-4FEB-8FFA-58D3528149F5} = {B73F2689-F104-4D0D-9E6B-29A47B662ACB}
+		{31674EB8-D5DF-485B-94A2-30F7AB5073BB} = {B73F2689-F104-4D0D-9E6B-29A47B662ACB}
+		{6D12EC82-8267-4D97-8493-B54C21CF6D27} = {B73F2689-F104-4D0D-9E6B-29A47B662ACB}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 10
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs36
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = TFSEventWorkflowsTests\\TFSEventWorkflowsTests.csproj
+		SccProjectName1 = TFSEventWorkflowsTests
+		SccLocalPath1 = TFSEventWorkflowsTests
+		SccProjectUniqueName2 = TFsEventWorkflowsServerPlugin\\TFSEventWorkflowsServerPlugin.csproj
+		SccProjectName2 = TFsEventWorkflowsServerPlugin
+		SccLocalPath2 = TFsEventWorkflowsServerPlugin
+		SccProjectUniqueName3 = LoggingLib\\LoggingLib.csproj
+		SccProjectName3 = LoggingLib
+		SccLocalPath3 = LoggingLib
+		SccProjectUniqueName4 = ActivitiesLib\\TFSActivitiesLib.csproj
+		SccProjectName4 = ActivitiesLib
+		SccLocalPath4 = ActivitiesLib
+		SccProjectUniqueName5 = TfsEventWorkflowsConfiguration\\TfsEventWorkflowsConfiguration.csproj
+		SccProjectName5 = TfsEventWorkflowsConfiguration
+		SccLocalPath5 = TfsEventWorkflowsConfiguration
+		SccProjectUniqueName6 = WorkflowsLib.2013.2\\WorkflowsLib.2013.2.csproj
+		SccProjectTopLevelParentUniqueName6 = TFSEventWorkflows.sln
+		SccProjectName6 = WorkflowsLib.2013.2
+		SccLocalPath6 = WorkflowsLib.2013.2
+		SccProjectUniqueName7 = WorkflowsLib.2012.0\\WorkflowsLib.2012.0.csproj
+		SccProjectTopLevelParentUniqueName7 = TFSEventWorkflows.sln
+		SccProjectName7 = WorkflowsLib.2012.0
+		SccLocalPath7 = WorkflowsLib.2012.0
+		SccProjectUniqueName8 = TFSEventWorksflowsServerSetup\\TFSEventWorksflowsServerSetup.wixproj
+		SccProjectName8 = TFSEventWorksflowsServerSetup
+		SccLocalPath8 = TFSEventWorksflowsServerSetup
+		SccProjectUniqueName9 = WorkflowsLib.2015.1\\WorkflowsLib.2015.1.csproj
+		SccProjectTopLevelParentUniqueName9 = TFSEventWorkflows.sln
+		SccProjectName9 = WorkflowsLib.2015.1
+		SccLocalPath9 = WorkflowsLib.2015.1
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = TFSEventWorkflows.vsmdi
+	EndGlobalSection
+EndGlobal

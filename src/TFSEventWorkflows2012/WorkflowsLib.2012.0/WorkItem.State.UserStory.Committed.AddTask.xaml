@@ -1,0 +1,251 @@
+﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="artiso.TFSEventWorkflows.WorkflowsLib.AddTaskToCommitedUserStory"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:att="clr-namespace:artiso.TFSEventWorkflows.TFSActivitiesLib;assembly=artiso.TFSEventWorkflows.TFSActivitiesLib"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:mtfs="clr-namespace:Microsoft.TeamFoundation.Framework.Server;assembly=Microsoft.TeamFoundation.Framework.Server"
+ xmlns:mtwc="clr-namespace:Microsoft.TeamFoundation.WorkItemTracking.Client;assembly=Microsoft.TeamFoundation.WorkItemTracking.Client"
+ xmlns:mtws="clr-namespace:Microsoft.TeamFoundation.WorkItemTracking.Server;assembly=Microsoft.TeamFoundation.WorkItemTracking.Server.DataAccessLayer"
+ xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
+ xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+ xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="TFSEvent" Type="InArgument(mtws:WorkItemChangedEvent)" />
+    <x:Property Name="TeamFoundationRequestContext" Type="InArgument(mtfs:TeamFoundationRequestContext)" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap2010:WorkflowViewState.IdRef>artiso.TFSEventWorkflows.WorkflowsLib.AddTaskToNewUserStory_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>artiso.TFSEventWorkflows.TFSActivitiesLib</x:String>
+      <x:String>Microsoft.TeamFoundation.Framework.Server</x:String>
+      <x:String>Microsoft.TeamFoundation.WorkItemTracking.Client</x:String>
+      <x:String>Microsoft.TeamFoundation.WorkItemTracking.Server</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System.Activities.Debugger</x:String>
+      <x:String>System.Activities.Debugger.Symbol</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System</x:String>
+      <x:String>Microsoft.TeamFoundation.WorkItemTracking.Common</x:String>
+      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>artiso.TFSEventWorkflows.TFSActivitiesLib</AssemblyReference>
+      <AssemblyReference>Microsoft.TeamFoundation.Framework.Server</AssemblyReference>
+      <AssemblyReference>Microsoft.TeamFoundation.WorkItemTracking.Client</AssemblyReference>
+      <AssemblyReference>Microsoft.TeamFoundation.WorkItemTracking.Server.DataAccessLayer</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="Main" sap2010:WorkflowViewState.IdRef="Sequence_2">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="mtwc:WorkItem" Name="SavedWorkitem" />
+      <Variable x:TypeArguments="x:String" Name="TFSUrl" />
+      <Variable x:TypeArguments="mtwc:WorkItem" Name="NewWorkItem" />
+    </Sequence.Variables>
+    <If Condition="[(Not (TFSEvent Is Nothing)) AndAlso (Not (TFSEvent.ChangedFields Is Nothing)) AndAlso (Not (TFSEvent.ChangedFields.StringFields Is Nothing))]" sap2010:WorkflowViewState.IdRef="If_4">
+      <If.Then>
+        <Sequence sap2010:WorkflowViewState.IdRef="Sequence_5">
+          <ForEach x:TypeArguments="mtws:StringField" DisplayName="ForEach&lt;StringField&gt;" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[TFSEvent.ChangedFields.StringFields]">
+            <ActivityAction x:TypeArguments="mtws:StringField">
+              <ActivityAction.Argument>
+                <DelegateInArgument x:TypeArguments="mtws:StringField" Name="field" />
+              </ActivityAction.Argument>
+              <Sequence sap2010:WorkflowViewState.IdRef="Sequence_4">
+                <If Condition="[field.ReferenceName = &quot;System.State&quot; And field.NewValue = &quot;Committed&quot;]" DisplayName="If state &quot;Committed&quot;" sap2010:WorkflowViewState.IdRef="If_3">
+                  <If.Then>
+                    <Sequence DisplayName="Sequence state &quot;Commited&quot;" sap2010:WorkflowViewState.IdRef="Sequence_3">
+                      <att:WriteLogMessage sap2010:WorkflowViewState.IdRef="WriteLogMessage_1" IsError="False" LogMessage="[String.Format(&quot;[{0}] changes from [{1}] to [{2}]&quot;, field.ReferenceName, field.OldValue, field.NewValue)]" />
+                      <att:GetWorkItemChangedEventData ChangedFields="{x:Null}" sap2010:WorkflowViewState.IdRef="GetWorkItemChangedEventData_1" TFSCollectionUrl="[TFSUrl]" TeamFoundationRequestContext="[TeamFoundationRequestContext]" WorkItem="[SavedWorkitem]" WorkItemChangedEvent="[TFSEvent]" />
+                      <If Condition="[SavedWorkitem.Type.Name.Equals(&quot;User Story&quot;) Or SavedWorkitem.Type.Name.Equals(&quot;Product Backlog Item&quot;)]" DisplayName="If &quot;User Story&quot; or &quot;Product Backlog Item&quot;" sap2010:WorkflowViewState.IdRef="If_1">
+                        <If.Then>
+                          <Sequence DisplayName="Sequence &quot;User Story&quot; or &quot;Product Backlog Item&quot;">
+                            <Sequence.Variables>
+                              <Variable x:TypeArguments="scg:List(mtwc:WorkItem)" Name="ChildWorkItems" />
+                              <Variable x:TypeArguments="x:Boolean" Default="True" Name="TaskMakeItDoneMustBeCreated" />
+                            </Sequence.Variables>
+                            <att:WriteLogMessage sap2010:WorkflowViewState.IdRef="WriteLogMessage_2" IsError="False" LogMessage="[String.Format(&quot;{0} [{1}] [{2}]&quot;, SavedWorkitem.Type.Name, SavedWorkitem.Id, SavedWorkitem.Title)]" />
+                            <Sequence DisplayName="Sequence  find TaskMakeItDone">
+                              <att:GetChildWorkItems WorkItemFieldsList="{x:Null}" ChildWorkItems="[ChildWorkItems]" WorkItem="[SavedWorkitem]" sap2010:WorkflowViewState.IdRef="GetChildWorkItems_1" />
+                              <ForEach x:TypeArguments="mtwc:WorkItem" DisplayName="ForEach&lt;WorkItem&gt;" Values="[ChildWorkItems]">
+                                <ActivityAction x:TypeArguments="mtwc:WorkItem">
+                                  <ActivityAction.Argument>
+                                    <DelegateInArgument x:TypeArguments="mtwc:WorkItem" Name="ChildWorkItem" />
+                                  </ActivityAction.Argument>
+                                  <If Condition="[ChildWorkItem.Type.Name.Equals(&quot;Task&quot;) AndAlso ChildWorkItem.Title.Equals(String.Format(&quot;Make it Done ([{0}] - {1})&quot;, SavedWorkitem.Id, SavedWorkitem.Title))]" DisplayName="If Child &quot;Task&quot;">
+                                    <If.Then>
+                                      <Assign>
+                                        <Assign.To>
+                                          <OutArgument x:TypeArguments="x:Boolean">[TaskMakeItDoneMustBeCreated]</OutArgument>
+                                        </Assign.To>
+                                        <Assign.Value>
+                                          <InArgument x:TypeArguments="x:Boolean">False</InArgument>
+                                        </Assign.Value>
+                                        <sap2010:WorkflowViewState.IdRef>Assign_1</sap2010:WorkflowViewState.IdRef>
+                                      </Assign>
+                                    </If.Then>
+                                    <sap2010:WorkflowViewState.IdRef>If_5</sap2010:WorkflowViewState.IdRef>
+                                  </If>
+                                </ActivityAction>
+                                <sap2010:WorkflowViewState.IdRef>ForEach`1_2</sap2010:WorkflowViewState.IdRef>
+                              </ForEach>
+                              <sap2010:WorkflowViewState.IdRef>Sequence_6</sap2010:WorkflowViewState.IdRef>
+                            </Sequence>
+                            <If Condition="[TaskMakeItDoneMustBeCreated]" DisplayName="If TaskMakeItDoneMustBeCreated">
+                              <If.Then>
+                                <Sequence DisplayName="create &quot;Task for &quot;User Story&quot;" sap2010:WorkflowViewState.IdRef="Sequence_1">
+                                  <att:CreateNewWorkItem sap2010:WorkflowViewState.IdRef="CreateNewWorkItem_1" NewWorkItem="[NewWorkItem]" TFSCollectionUrl="[TFSUrl]" TeamProjectName="[SavedWorkitem.Project.Name]" WorkItemType="Task" />
+                                  <att:ChangeWorkItemField FieldReferenceName="System.Title" sap2010:WorkflowViewState.IdRef="ChangeWorkItemField_1" NewValue="[String.Format(&quot;Make it Done ([{0}] - {1})&quot;, SavedWorkitem.Id, SavedWorkitem.Title)]" WorkItem="[NewWorkItem]" />
+                                  <att:SaveWorkItem sap2010:WorkflowViewState.IdRef="SaveWorkItem_1" WorkItem="[NewWorkItem]" />
+                                  <att:WriteLogMessage sap2010:WorkflowViewState.IdRef="WriteLogMessage_3" IsError="False" LogMessage="[String.Format(&quot;{0} [{1}] [{2}]&quot;, NewWorkItem.Type.Name, NewWorkItem.Id, NewWorkItem.Title)]" />
+                                  <att:CreateLink ChildWorkItem="[NewWorkItem]" sap2010:WorkflowViewState.IdRef="CreateLink_1" LinkType="System.LinkTypes.Hierarchy" ParentWorkItem="[SavedWorkitem]" />
+                                </Sequence>
+                              </If.Then>
+                              <sap2010:WorkflowViewState.IdRef>If_6</sap2010:WorkflowViewState.IdRef>
+                            </If>
+                            <sap2010:WorkflowViewState.IdRef>Sequence_7</sap2010:WorkflowViewState.IdRef>
+                          </Sequence>
+                        </If.Then>
+                      </If>
+                    </Sequence>
+                  </If.Then>
+                </If>
+              </Sequence>
+            </ActivityAction>
+          </ForEach>
+        </Sequence>
+      </If.Then>
+    </If>
+    <sads:DebugSymbol.Symbol>d5EBQzpcdGZzLWxvY2FsXHR0cm90emtpXHRmcy5jb2RlcGxleC5jb21cdGZzMzZcdGZzZXZlbnR3b3JrZmxvd3NcVEZTRXZlbnRXb3JrZmxvd3MyMDEyXFdvcmtmbG93c0xpYlxXb3JrSXRlbS5TdGF0ZS5Vc2VyU3RvcnkuQ29tbWl0dGVkLkFkZFRhc2sueGFtbDk9A40BDgIBAUMFiwEKAgECQxNDowECAQNFCYkBFAIBBEYLiAEVAgEFRpUBRrwBAgFGSw+GARoCAQZMEYUBFgIBB0wfTHwCAQhOFYMBIAIBCU8XT/MBAgFDUBdQqgICATpRF4IBHAIBCk9oT28CAUVPe0/wAQIBRFCbAlCnAgIBQVD0AVCFAgIBP1DKAVDqAQIBPVCiAVCsAQIBO1ElUaMBAgELUxuAASYCAQxWTVZTAgENWB1Y8gECATdZHXIoAgEqcx1+IgIBDlhuWHUCATlYgQFY7wECAThaH1rJAQIBM1sfcCkCAStzK3NKAgEPdSF7LAIBEVp/WpABAgE1WmNadQIBNFt1W4cBAgEyYCNtKAIBLHYjdu0BAgEjdyN3mwICAR54I3iBAQIBG3kjefIBAgEYeiN6yQECARJgMWDmAQIBLWInajACAS52uAF21gECASl25AF26gECASh2fHaLAQIBJnadAXanAQIBJHeJAneYAgIBIXefAXf/AQIBIHdPd10CAR94b3h+AgEceXR5ewIBGnmHAXnvAQIBGXpBelACARZ6iQF6pQECARV6tQF6xgECARNnU2dYAgExZFRkcQIBLw==</sads:DebugSymbol.Symbol>
+  </Sequence>
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData Id="WriteLogMessage_1" sap:VirtualizedContainerService.HintSize="464,22" />
+      <sap2010:ViewStateData Id="GetWorkItemChangedEventData_1" sap:VirtualizedContainerService.HintSize="464,22" />
+      <sap2010:ViewStateData Id="WriteLogMessage_2" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="GetChildWorkItems_1" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="Assign_1" sap:VirtualizedContainerService.HintSize="242,59" />
+      <sap2010:ViewStateData Id="If_5" sap:VirtualizedContainerService.HintSize="464,203">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ForEach`1_2" sap:VirtualizedContainerService.HintSize="200,49">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_6" sap:VirtualizedContainerService.HintSize="200,49">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="CreateNewWorkItem_1" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="ChangeWorkItemField_1" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="SaveWorkItem_1" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="WriteLogMessage_3" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="CreateLink_1" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="222,394">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="If_6" sap:VirtualizedContainerService.HintSize="200,49">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_7" sap:VirtualizedContainerService.HintSize="222,324">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="If_1" sap:VirtualizedContainerService.HintSize="464,467" />
+      <sap2010:ViewStateData Id="Sequence_3" sap:VirtualizedContainerService.HintSize="486,715">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="If_3" sap:VirtualizedContainerService.HintSize="611,858">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_4" sap:VirtualizedContainerService.HintSize="633,982">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ForEach`1_1" sap:VirtualizedContainerService.HintSize="663,1127">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_5" sap:VirtualizedContainerService.HintSize="685,1251">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="If_4" sap:VirtualizedContainerService.HintSize="810,1394" />
+      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="832,1518">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="artiso.TFSEventWorkflows.WorkflowsLib.AddTaskToNewUserStory_1" sap:VirtualizedContainerService.HintSize="872,1598" />
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+</Activity>

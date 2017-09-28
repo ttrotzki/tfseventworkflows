@@ -1,0 +1,144 @@
+﻿<Activity mc:Ignorable="sap" x:Class="WIStateWorkflow" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:a="clr-namespace:ActivitiesLib;assembly=ActivitiesLib" xmlns:a1="clr-namespace:ActivitiesLib;assembly=CompositesLib" xmlns:atc="clr-namespace:artiso.TFSEventWorkflows.CompositesLib;assembly=artiso.TFSEventWorkflows.CompositesLib" xmlns:att="clr-namespace:artiso.TFSEventWorkflows.TFSActivitiesLib;assembly=artiso.TFSEventWorkflows.TFSActivitiesLib" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mtbwa="clr-namespace:Microsoft.TeamFoundation.Build.Workflow.Activities;assembly=Microsoft.TeamFoundation.Build.Workflow" xmlns:mtc="clr-namespace:Microsoft.TeamFoundation.Client;assembly=Microsoft.TeamFoundation.Client" xmlns:mtfs="clr-namespace:Microsoft.TeamFoundation.Framework.Server;assembly=Microsoft.TeamFoundation.Framework.Server" xmlns:mtwc="clr-namespace:Microsoft.TeamFoundation.WorkItemTracking.Client;assembly=Microsoft.TeamFoundation.WorkItemTracking.Client" xmlns:mtwc1="clr-namespace:Microsoft.TeamFoundation.WorkItemTracking.Common;assembly=Microsoft.TeamFoundation.WorkItemTracking.Client" xmlns:mtws="clr-namespace:Microsoft.TeamFoundation.WorkItemTracking.Server;assembly=Microsoft.TeamFoundation.WorkItemTracking.Server.DataAccessLayer" xmlns:mtws1="clr-namespace:Microsoft.TeamFoundation.WorkItemTracking.Server;assembly=Microsoft.TeamFoundation.WorkItemTracking.Server.DataServices" xmlns:mv="clr-namespace:Microsoft.VisualBasic;assembly=System" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:s1="clr-namespace:System;assembly=System" xmlns:s2="clr-namespace:System;assembly=System.Xml" xmlns:s3="clr-namespace:System;assembly=System.Core" xmlns:s4="clr-namespace:System;assembly=System.ServiceModel" xmlns:sa="clr-namespace:System.Activities;assembly=System.Activities" xmlns:sad="clr-namespace:System.Activities.Debugger;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System" xmlns:scg1="clr-namespace:System.Collections.Generic;assembly=System.ServiceModel" xmlns:scg2="clr-namespace:System.Collections.Generic;assembly=System.Core" xmlns:scg3="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:sco1="clr-namespace:System.Collections.ObjectModel;assembly=System" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:sl="clr-namespace:System.Linq;assembly=System.Core" xmlns:st="clr-namespace:System.Text;assembly=mscorlib" xmlns:tac="clr-namespace:TfsBuildExtensions.Activities.Communication;assembly=TfsBuildExtensions.Activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="TFSEvent" Type="InArgument(mtws:WorkItemChangedEvent)" />
+    <x:Property Name="TeamFoundationRequestContext" Type="InArgument(mtfs:TeamFoundationRequestContext)" />
+  </x:Members>
+  <sap:VirtualizedContainerService.HintSize>894,1914</sap:VirtualizedContainerService.HintSize>
+  <mva:VisualBasic.Settings>Assembly references and imported namespaces for internal implementation</mva:VisualBasic.Settings>
+  <sap:WorkflowViewStateService.ViewState>
+    <scg3:Dictionary x:TypeArguments="x:String, x:Object">
+      <x:Boolean x:Key="ShouldExpandAll">True</x:Boolean>
+      <x:Boolean x:Key="ShouldCollapseAll">False</x:Boolean>
+    </scg3:Dictionary>
+  </sap:WorkflowViewStateService.ViewState>
+  <Sequence DisplayName="MainWorkflow" sad:XamlDebuggerXmlReader.FileName="C:\ws\CodePlex\tfseventworkflows\TFSEventWorkflows\WorkflowsLib\StatusAggregation.xaml" sap:VirtualizedContainerService.HintSize="854,1874">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="mtwc:WorkItem" Name="CurrentlySavedWorkItem" />
+      <Variable x:TypeArguments="x:String" Name="TFSCollectionUrl" />
+      <Variable x:TypeArguments="mtws:ChangedFieldsType" Name="ChangedWorkItemFields" />
+      <Variable x:TypeArguments="mtwc:WorkItem" Name="ParentWorkItem" />
+      <Variable x:TypeArguments="scg3:List(mtwc:WorkItem)" Name="ChildWorkItems" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg3:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg3:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <att:GetWorkItemChangedEventData ChangedFields="[ChangedWorkItemFields]" sap:VirtualizedContainerService.HintSize="832,22" TFSCollectionUrl="[TFSCollectionUrl]" TeamFoundationRequestContext="[TeamFoundationRequestContext]" WorkItem="[CurrentlySavedWorkItem]" WorkItemChangedEvent="[TFSEvent]" />
+    <Sequence sap:VirtualizedContainerService.HintSize="832,1688">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg3:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg3:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <att:WriteLogMessage sap:VirtualizedContainerService.HintSize="810,22" IsError="False" LogMessage="Changed Work Item is in PERIan Demo Project, processing ..." />
+      <If Condition="[(CurrentlySavedWorkItem.Type.Name.Equals(&quot;Task&quot;) Or&#xA; CurrentlySavedWorkItem.Type.Name.Equals(&quot;Bug&quot;))]" DisplayName="If saved item is Task or Bug" sap:VirtualizedContainerService.HintSize="810,1502">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg3:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg3:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+        <If.Then>
+          <Sequence sap:VirtualizedContainerService.HintSize="685,1392">
+            <Sequence.Variables>
+              <Variable x:TypeArguments="x:Boolean" Default="True" Name="AllChildItemsAreClosed" />
+            </Sequence.Variables>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg3:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg3:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <att:WriteLogMessage sap:VirtualizedContainerService.HintSize="663,22" IsError="False" LogMessage="[String.Format(&quot;Found Work Item with ID {0} which makes Status aggregation necessary.&quot;, CurrentlySavedWorkItem.Id)]" />
+            <att:GetParentWorkItem sap:VirtualizedContainerService.HintSize="663,22" ParentWorkItem="[ParentWorkItem]" WorkItem="[CurrentlySavedWorkItem]" />
+            <If Condition="[ParentWorkItem.State.Equals(&quot;Active&quot;)]" DisplayName="If State of parent Work Item is Active" sap:VirtualizedContainerService.HintSize="663,1144">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg3:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg3:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <If.Then>
+                <Sequence sap:VirtualizedContainerService.HintSize="538,1038">
+                  <Sequence.Variables>
+                    <Variable x:TypeArguments="x:Double" Default="0" Name="CompletedWorkSum" />
+                  </Sequence.Variables>
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg3:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                    </scg3:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <att:GetChildWorkItems WorkItemFieldsList="{x:Null}" ChildWorkItems="[ChildWorkItems]" sap:VirtualizedContainerService.HintSize="516,22" WorkItem="[ParentWorkItem]" />
+                  <ForEach x:TypeArguments="mtwc:WorkItem" DisplayName="ForEach item in Child Work Items" sap:VirtualizedContainerService.HintSize="516,436" Values="[ChildWorkItems]">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg3:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg3:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <ActivityAction x:TypeArguments="mtwc:WorkItem">
+                      <ActivityAction.Argument>
+                        <DelegateInArgument x:TypeArguments="mtwc:WorkItem" Name="item" />
+                      </ActivityAction.Argument>
+                      <Sequence sap:VirtualizedContainerService.HintSize="486,330">
+                        <Sequence.Variables>
+                          <Variable x:TypeArguments="x:String" Name="CompletedWork" />
+                        </Sequence.Variables>
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg3:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg3:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <If Condition="[Not item.State.Equals(&quot;Closed&quot;) And Not item.State.Equals(&quot;Deleted&quot;)]" DisplayName="If item is not closed" sap:VirtualizedContainerService.HintSize="464,206">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg3:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                            </scg3:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <If.Then>
+                            <Assign sap:VirtualizedContainerService.HintSize="291,100">
+                              <Assign.To>
+                                <OutArgument x:TypeArguments="x:Boolean">[AllChildItemsAreClosed]</OutArgument>
+                              </Assign.To>
+                              <Assign.Value>
+                                <InArgument x:TypeArguments="x:Boolean">False</InArgument>
+                              </Assign.Value>
+                            </Assign>
+                          </If.Then>
+                        </If>
+                      </Sequence>
+                    </ActivityAction>
+                  </ForEach>
+                  <If Condition="[AllChildItemsAreClosed]" DisplayName="If all childs are closed" sap:VirtualizedContainerService.HintSize="516,314">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg3:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg3:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <If.Then>
+                      <Sequence sap:VirtualizedContainerService.HintSize="281,208">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg3:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg3:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <att:ChangeWorkItemField FieldReferenceName="System.State" sap:VirtualizedContainerService.HintSize="200,22" NewValue="[&quot;Resolved&quot;]" WorkItem="[ParentWorkItem]" />
+                        <att:WriteLogMessage sap:VirtualizedContainerService.HintSize="200,22" IsError="False" LogMessage="[String.Format(&quot;Changed State of Parent Item with ID {0} from 'Active' to 'Implemented'&quot;, ParentWorkItem.Id)]" />
+                      </Sequence>
+                    </If.Then>
+                  </If>
+                  <att:SaveWorkItem sap:VirtualizedContainerService.HintSize="516,22" WorkItem="[ParentWorkItem]" />
+                </Sequence>
+              </If.Then>
+            </If>
+          </Sequence>
+        </If.Then>
+      </If>
+    </Sequence>
+  </Sequence>
+</Activity>
