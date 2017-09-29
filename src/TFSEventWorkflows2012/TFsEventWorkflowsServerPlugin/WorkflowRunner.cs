@@ -544,9 +544,11 @@
 #else
         Uri uriRequestContextCollection = new Uri(srvLocation.GetServerAccessMapping(requestContextCollection).AccessPoint);
 #endif
-        UriBuilder uriBuilderRequestContextCollection = new UriBuilder(uriRequestContextCollection.Scheme, System.Environment.MachineName, uriRequestContextCollection.Port, uriRequestContextCollection.PathAndQuery);
+        string strHost = System.Environment.MachineName;
+        string strFQDN = System.Net.Dns.GetHostEntry(strHost).HostName;
+        UriBuilder uriBuilderRequestContextCollection = new UriBuilder(uriRequestContextCollection.Scheme, strFQDN, uriRequestContextCollection.Port, uriRequestContextCollection.PathAndQuery);
         uriRequestContextCollection = uriBuilderRequestContextCollection.Uri;
-
+        
         // get access to tfs and collection
         Uri uriTfsServer = new Uri(uriRequestContextCollection.AbsoluteUri);
         Uri uriTfsCollection = new Uri(uriRequestContextCollection.AbsoluteUri + "/" + requestContextCollection.ServiceHost.Name);
@@ -563,9 +565,9 @@
         // local base path for version control workspace mapping
         string pathLocalWorkflowData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\TfsEventWorkflows";
 
-        string strWorkspaceName = "TfsEventWorkflows-On-" + System.Environment.MachineName;
+        string strWorkspaceName = "TfsEventWorkflows-On-" + strHost;
         string strWorkspaceOwner = string.Format(@"{0}\{1}", Environment.UserDomainName, Environment.UserName);
-        string strWorkspaceComputer = Environment.MachineName;
+        string strWorkspaceComputer = strHost;
 
         List<CachedWorkflowFolder> workflowFolders = new List<CachedWorkflowFolder>();
 

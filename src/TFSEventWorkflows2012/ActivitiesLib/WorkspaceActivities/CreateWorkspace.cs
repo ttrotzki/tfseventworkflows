@@ -86,12 +86,14 @@ namespace artiso.TFSEventWorkflows.TFSActivitiesLib
                 {
                 }
 
+                string strHost = System.Environment.MachineName;
+                string strFQDN = System.Net.Dns.GetHostEntry(strHost).HostName;
                 Workspace workspace = versionControl.CreateWorkspace(
                                                     workspaceName,
                                                     versionControl.AuthorizedUser,
                                                     workspaceComment,
                                                     workingFolders,
-                                                    Environment.MachineName);
+                                                    strHost);
                 context.SetValue(this.Workspace, workspace);
             }
             catch (Exception ex)

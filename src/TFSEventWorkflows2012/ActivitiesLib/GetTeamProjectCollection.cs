@@ -42,12 +42,14 @@ namespace artiso.TFSEventWorkflows.TFSActivitiesLib
       #if UsingILocationService
       ILocationService tfLocationService = requestContext.GetService<ILocationService>();
       Uri uriRequestContext = new Uri(tfLocationService.GetLocationData(requestContext, Guid.Empty).GetServerAccessMapping(requestContext).AccessPoint + "/" + requestContext.ServiceHost.Name);
-      #else
+#else
       var tfLocationService = requestContext.GetService<TeamFoundationLocationService>();
       var accessMapping = tfLocationService.GetServerAccessMapping(requestContext);
       Uri uriRequestContext = new Uri(tfLocationService.GetHostLocation(requestContext, accessMapping));
-      #endif
-      UriBuilder uriBuilderRequestContext = new UriBuilder(uriRequestContext.Scheme, System.Environment.MachineName, uriRequestContext.Port, uriRequestContext.PathAndQuery);
+#endif
+      string strHost = System.Environment.MachineName;
+      string strFQDN = System.Net.Dns.GetHostEntry(strHost).HostName;
+      UriBuilder uriBuilderRequestContext = new UriBuilder(uriRequestContext.Scheme, strFQDN, uriRequestContext.Port, uriRequestContext.PathAndQuery);
       string teamProjectCollectionUrl = uriBuilderRequestContext.Uri.AbsoluteUri;
       var teamProjectCollection = new TfsTeamProjectCollection(new Uri(teamProjectCollectionUrl));
 
