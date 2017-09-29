@@ -80,6 +80,11 @@
     <TfsVersion>2017.1</TfsVersion>
   </PropertyGroup>
 
+  <!-- 2017.2 RTM '15.2|15.117.26714.0'-->
+  <PropertyGroup Condition="'$(TfsBuildNumber)' == '15.117.26714.0'">
+    <TfsVersion>2017.2</TfsVersion>
+  </PropertyGroup>
+
   <!-- add TFS to AssemblySearchPath -->
 
   <PropertyGroup>
@@ -220,7 +225,7 @@
   </PropertyGroup>
 
   <!-- starting with TFS 2017.0 UICredentialsProvider is obsolete and removed, use VssClientCredentials instead -->
-  <ItemGroup Condition="'$(TfsVersion)' >= '2013.0'">
+  <ItemGroup Condition="'$(TfsVersion)' >= '2013.0' AND !('$(TfsVersion)' >= '2017.2')">
     <Reference Include="Microsoft.VisualStudio.Services.Client">
       <Private>$(TfsComCopyLocal)</Private>
     </Reference>

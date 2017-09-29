@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.24606.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TFSActivitiesLib", "ActivitiesLib\TFSActivitiesLib.csproj", "{E9EE3325-379D-499E-8B26-4763DCC0C830}"
 EndProject
@@ -40,8 +40,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkflowsLib.2013.2", "WorkflowsLib.2013.2\WorkflowsLib.2013.2.csproj", "{6F4D90B0-97B3-4FEB-8FFA-58D3528149F5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkflowsLib.2012.0", "WorkflowsLib.2012.0\WorkflowsLib.2012.0.csproj", "{31674EB8-D5DF-485B-94A2-30F7AB5073BB}"
-EndProject
-Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "TFSEventWorksflowsServerSetup", "TFSEventWorksflowsServerSetup\TFSEventWorksflowsServerSetup.wixproj", "{CB49A57A-68D6-484B-99AC-1AE79F6D6326}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkflowsLib.2015.1", "WorkflowsLib.2015.1\WorkflowsLib.2015.1.csproj", "{6D12EC82-8267-4D97-8493-B54C21CF6D27}"
 EndProject
@@ -134,16 +132,6 @@ Global
 		{31674EB8-D5DF-485B-94A2-30F7AB5073BB}.Release|Mixed Platforms.Build.0 = Release|x86
 		{31674EB8-D5DF-485B-94A2-30F7AB5073BB}.Release|x86.ActiveCfg = Release|x86
 		{31674EB8-D5DF-485B-94A2-30F7AB5073BB}.Release|x86.Build.0 = Release|x86
-		{CB49A57A-68D6-484B-99AC-1AE79F6D6326}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{CB49A57A-68D6-484B-99AC-1AE79F6D6326}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{CB49A57A-68D6-484B-99AC-1AE79F6D6326}.Debug|Mixed Platforms.Build.0 = Debug|x86
-		{CB49A57A-68D6-484B-99AC-1AE79F6D6326}.Debug|x86.ActiveCfg = Debug|x86
-		{CB49A57A-68D6-484B-99AC-1AE79F6D6326}.Debug|x86.Build.0 = Debug|x86
-		{CB49A57A-68D6-484B-99AC-1AE79F6D6326}.Release|Any CPU.ActiveCfg = Release|x86
-		{CB49A57A-68D6-484B-99AC-1AE79F6D6326}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{CB49A57A-68D6-484B-99AC-1AE79F6D6326}.Release|Mixed Platforms.Build.0 = Release|x86
-		{CB49A57A-68D6-484B-99AC-1AE79F6D6326}.Release|x86.ActiveCfg = Release|x86
-		{CB49A57A-68D6-484B-99AC-1AE79F6D6326}.Release|x86.Build.0 = Release|x86
 		{6D12EC82-8267-4D97-8493-B54C21CF6D27}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6D12EC82-8267-4D97-8493-B54C21CF6D27}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6D12EC82-8267-4D97-8493-B54C21CF6D27}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
@@ -164,42 +152,6 @@ Global
 		{6F4D90B0-97B3-4FEB-8FFA-58D3528149F5} = {B73F2689-F104-4D0D-9E6B-29A47B662ACB}
 		{31674EB8-D5DF-485B-94A2-30F7AB5073BB} = {B73F2689-F104-4D0D-9E6B-29A47B662ACB}
 		{6D12EC82-8267-4D97-8493-B54C21CF6D27} = {B73F2689-F104-4D0D-9E6B-29A47B662ACB}
-	EndGlobalSection
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 10
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs36
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = TFSEventWorkflowsTests\\TFSEventWorkflowsTests.csproj
-		SccProjectName1 = TFSEventWorkflowsTests
-		SccLocalPath1 = TFSEventWorkflowsTests
-		SccProjectUniqueName2 = TFsEventWorkflowsServerPlugin\\TFSEventWorkflowsServerPlugin.csproj
-		SccProjectName2 = TFsEventWorkflowsServerPlugin
-		SccLocalPath2 = TFsEventWorkflowsServerPlugin
-		SccProjectUniqueName3 = LoggingLib\\LoggingLib.csproj
-		SccProjectName3 = LoggingLib
-		SccLocalPath3 = LoggingLib
-		SccProjectUniqueName4 = ActivitiesLib\\TFSActivitiesLib.csproj
-		SccProjectName4 = ActivitiesLib
-		SccLocalPath4 = ActivitiesLib
-		SccProjectUniqueName5 = TfsEventWorkflowsConfiguration\\TfsEventWorkflowsConfiguration.csproj
-		SccProjectName5 = TfsEventWorkflowsConfiguration
-		SccLocalPath5 = TfsEventWorkflowsConfiguration
-		SccProjectUniqueName6 = WorkflowsLib.2013.2\\WorkflowsLib.2013.2.csproj
-		SccProjectTopLevelParentUniqueName6 = TFSEventWorkflows.sln
-		SccProjectName6 = WorkflowsLib.2013.2
-		SccLocalPath6 = WorkflowsLib.2013.2
-		SccProjectUniqueName7 = WorkflowsLib.2012.0\\WorkflowsLib.2012.0.csproj
-		SccProjectTopLevelParentUniqueName7 = TFSEventWorkflows.sln
-		SccProjectName7 = WorkflowsLib.2012.0
-		SccLocalPath7 = WorkflowsLib.2012.0
-		SccProjectUniqueName8 = TFSEventWorksflowsServerSetup\\TFSEventWorksflowsServerSetup.wixproj
-		SccProjectName8 = TFSEventWorksflowsServerSetup
-		SccLocalPath8 = TFSEventWorksflowsServerSetup
-		SccProjectUniqueName9 = WorkflowsLib.2015.1\\WorkflowsLib.2015.1.csproj
-		SccProjectTopLevelParentUniqueName9 = TFSEventWorkflows.sln
-		SccProjectName9 = WorkflowsLib.2015.1
-		SccLocalPath9 = WorkflowsLib.2015.1
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = TFSEventWorkflows.vsmdi
